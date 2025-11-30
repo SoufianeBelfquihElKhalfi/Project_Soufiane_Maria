@@ -5,52 +5,53 @@
 <head runat="server">
     <title>Hotel</title>
     <style>
-        /* Header */
-        .navbar {
-            width: 100%;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 50px;
-            border-bottom: 1px solid #e4e4e4;
-            background-color: #ffffff;
-        }
+ /* Header */
+.navbar {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Reduce el padding para evitar que sobresalga */
+    border-bottom: 1px solid #e4e4e4;
+    background-color: #ffffff;
+    box-sizing: border-box; /* Asegura que el padding no haga que el header sobresalga */
+}
 
-        /* Lado izquierdo: logo + nombre */
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-        .navbar-logo {
-            height: 40px;
-            width: auto;
-        }
+.navbar-logo {
+    height: 40px;
+    width: auto;
+}
 
-        .navbar-title {
-            font-size: 22px;
-            font-weight: 600;
-        }
+.navbar-title {
+    font-size: 22px;
+    font-weight: 600;
+}
 
-        /* Botón login */
-        .navbar-login {
-            padding: 12px 28px;
-            background-color: #0d6efd;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-right: 20px; /* Añadido para separar del borde derecho */
-        }
+/* Botón login */
+.navbar-login {
+    padding: 12px 28px;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 20px;
+}
 
-        .navbar-login:hover {
-            opacity: 0.85;
-        }
+.navbar-login:hover {
+    opacity: 0.85;
+}
 
-        /* Cuerpo */
+
+/* Cuerpo */
 .main-content {
     padding: 50px 100px;
     background-color: #f9f9f9;
@@ -112,13 +113,76 @@
     color: #ffffff;
     padding: 30px;
     text-align: center;
-    margin-top: 50px; /* Espacio superior */
+    margin-top: 50px;
 }
 
 .footer p {
     margin: 0;
     font-size: 14px;
 }
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .navbar-title {
+        font-size: 18px;
+    }
+
+    .navbar-login {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .service-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card {
+        width: 80%;
+        margin-bottom: 30px;
+    }
+
+    .footer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+        height: auto;
+    }
+
+    .navbar-left {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .navbar-title {
+        font-size: 16px;
+    }
+
+    .navbar-login {
+        font-size: 14px;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+    .service-card {
+        width: 90%;
+    }
+}
+
 
     </style>
 </head>
