@@ -7,95 +7,57 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width: 360px">
-            <!-- esta insercion se prueba con login -->
-            CREDENTIALS<br /> 
-            ID:<br />
+        <div>
+            <h1>Welcome to the Receptionist Dashboard</h1>
+
+        <!-- Aquí defino los controles Label en el archivo .aspx -->
+            <asp:Label ID="LabelUsername" runat="server" Text=""></asp:Label>
             <br />
-            <asp:TextBox ID="TextBoxCredentialID" runat="server" OnTextChanged="TextBoxCredentialID_TextChanged"></asp:TextBox>
+            <asp:Label ID="LabelProfile" runat="server" Text=""></asp:Label>
             <br />
-            <br />
-            Username:<br />
-            <br />
-            <asp:TextBox ID="TextBoxUsername" runat="server" OnTextChanged="TextBoxUsername_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Profile:<br />
-            <br />
-            <asp:TextBox ID="TextBoxProfile" runat="server" OnTextChanged="TextBoxProfile_TextChanged" TextMode="Password"></asp:TextBox>
-            <br />
-            <br />
-            Password:<br />
-            <br />
-            <asp:TextBox ID="TextBoxPassword" runat="server" OnTextChanged="TextBoxPassword_TextChanged" TextMode="Password"></asp:TextBox>
-            <br />
-            <br />
-            <asp:Label ID="LabelMessageCredentials" runat="server" ForeColor="Red"></asp:Label>
-            <br />
-            <br />
+
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
         </div>
 
+       <!-- Registro de Credenciales, consultar insercion!! -->
         <div style="width: 360px">
-<!-- esta insercion se consulta -->
-            CLIENTS<br />
-            <br />
-            ID:<br />
-            <br />
-            <asp:TextBox ID="TextBoxClientID" runat="server" OnTextChanged="TextBoxClientID_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Name:<br />
-            <br />
-            <asp:TextBox ID="TextBoxtName" runat="server" OnTextChanged="TextBoxClientName_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Date of birth:<br />
-            <br />
-            <asp:TextBox ID="TextBoxDOB" runat="server" OnTextChanged="TextBoxClientDOB_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Address:<br />
-            <br />
-            <asp:TextBox ID="TextBoxAddress" runat="server" OnTextChanged="TextBoxClientAddress_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Mobile phone:<br />
-            <br />
-            <asp:TextBox ID="TextBoxMobile" runat="server" OnTextChanged="TextBoxClientMobile_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            <asp:Label ID="LabelMessageClients" runat="server" ForeColor="Red"></asp:Label>
-            <br />
-            <br />
+            <h3>Register User Credentials</h3>
+            <asp:Label ID="LabelCredentialID" runat="server" Text="ID:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxCredentialID" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="Label1" runat="server" Text="Username:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxUsername" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="Label2" runat="server" Text="Profile:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxProfile" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="LabelPassword" runat="server" Text="Password:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox><br /><br />
+            
+            <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" />
+            <asp:Label ID="LabelMessage" runat="server" ForeColor="Red"></asp:Label><br />
         </div>
 
+        <!-- Registro de Cliente, consultar insercion!! -->
         <div style="width: 360px">
-<!-- esta insercion se consulta -->
-            RESERVATIONS<br />
-            <br />
-            ID:<br />
-            <br />
-            <asp:TextBox ID="TextBoxReservationID" runat="server" OnTextChanged="TextBoxReservationID_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Arrival date:<br />
-            <br />
-            <asp:TextBox ID="TextBoxArrivalDate" runat="server" OnTextChanged="TextBoxArrivalDate_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Departure date:<br />
-            <br />
-            <asp:TextBox ID="TextBoxDepartureDate" runat="server" OnTextChanged="TextBoxDepartureDate_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            Type of room:<br />
-            <br />
-            <asp:TextBox ID="TextBoxRoomType" runat="server" OnTextChanged="TextBoxRoomType_TextChanged"></asp:TextBox>
-            <br />
-            <br />
-            <asp:Label ID="LabelMessageReservations" runat="server" ForeColor="Red"></asp:Label>
-            <br />
-            <br />
+            <h3>Register Client</h3>
+            <asp:Label ID="LabelClientID" runat="server" Text="ID:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxClientID" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="LabelClientName" runat="server" Text="Name:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxtName" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="LabelDOB" runat="server" Text="Date of Birth:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxDOB" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="LabelAddress" runat="server" Text="Address:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxAddress" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Label ID="LabelMobile" runat="server" Text="Mobile Phone:"></asp:Label><br />
+            <asp:TextBox ID="TextBoxMobile" runat="server"></asp:TextBox><br /><br />
+            
+            <asp:Button ID="btnRegisterClient" runat="server" Text="Register Client" OnClick="btnRegisterClient_Click" />
+            <asp:Label ID="LabelClientMessage" runat="server" ForeColor="Red"></asp:Label><br />
         </div>
 
         <div style="width: 360px">
