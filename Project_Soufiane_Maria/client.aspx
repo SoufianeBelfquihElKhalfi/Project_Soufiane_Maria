@@ -93,9 +93,18 @@
         </header>
 
         <div class="container">
-            <div class="left-div"></div>
+            <div class="left-div">
+    <asp:Label ID="LabelId" runat="server" ></asp:Label><br />
+    <asp:Label ID="LabelDob" runat="server" ></asp:Label><br />
+    <asp:Label ID="LabelAddress" runat="server"></asp:Label><br />
+    <asp:Label ID="LabelMobile" runat="server"></asp:Label><br />
+</div>
+
             <div class="right-div">
-                <asp:Button ID="Button1" runat="server" Text="Check reservations" OnClick="Button1_Click" CssClass="btn" />
+                <asp:Label ID="LabelArrival" runat="server" ></asp:Label><br />
+<asp:Label ID="LabelDeparture" runat="server" ></asp:Label><br />
+<asp:Label ID="LabelRoom" runat="server"></asp:Label><br />
+<asp:Label ID="LabelDNI" runat="server"></asp:Label><br />
             </div>
         </div>
     </form>

@@ -1,10 +1,19 @@
 using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Project_Soufiane_Maria
 {
     public partial class client : System.Web.UI.Page
     {
+        protected Label LabelId;
+        protected Label LabelDob;
+        protected Label LabelAddress;
+        protected Label LabelMobile;
+        protected Label LabelArrival;      
+        protected Label LabelDeparture;
+        protected Label LabelRoom; 
+        protected Label LabelDNI;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,12 +27,12 @@ namespace Project_Soufiane_Maria
 
                     LabelWelcome.Text = "Welcome, " + profile + " " + username;
 
-                    // Si no es client, fuera
-                    if (!profile.Equals("client", StringComparison.OrdinalIgnoreCase))
+                    if (profile != "client")
                     {
+                        // Si el perfil no es "client", redirigir a la página de login o acceso denegado
                         Response.Redirect("login.aspx");
-                        return;
                     }
+
 
                     // ============================
                     // OBTENER DATOS DEL CLIENTE
@@ -46,6 +55,7 @@ namespace Project_Soufiane_Maria
                         LabelAddress.Text = string.Empty;
                         LabelMobile.Text = string.Empty;
                     }
+
                 }
                 else
                 {
@@ -54,12 +64,6 @@ namespace Project_Soufiane_Maria
                 }
             }
         }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
