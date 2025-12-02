@@ -72,14 +72,14 @@
             opacity: 0.85;
         }
 
-        /* CONTENIDO */
+        /* CONTENT */
         .main-content {
             padding: 50px 100px;
             flex: 1;
             box-sizing: border-box;
         }
 
-        /* Sección de bienvenida */
+        /* Welcome section */
         .welcome-section {
             text-align: center;
             margin-bottom: 50px;
@@ -103,7 +103,7 @@
             margin-bottom: 0;
         }
 
-        /* TARJETAS DE SERVICIOS */
+        /* SERVICE CARDS */
         .service-section {
             display: flex;
             justify-content: space-between;
@@ -201,39 +201,39 @@
         <header class="navbar">
             <div class="navbar-left">
                 <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/logo.png" CssClass="navbar-logo" />
-                <asp:Label ID="lblTitulo" runat="server" Text="Hoteles Trivago" CssClass="navbar-title" />
+                <asp:Label ID="lblTitulo" runat="server" Text="Trivago Hotels" CssClass="navbar-title" />
             </div>
-            <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="navbar-login" OnClick="btnLogin_Click" />
+            <asp:Button ID="btnLogin" runat="server" Text="Log in" CssClass="navbar-login" OnClick="btnLogin_Click" />
         </header>
 
         <div class="main-content">
 
-            <!-- BIENVENIDA -->
+            <!-- WELCOME -->
             <div class="welcome-section">
                 <div class="welcome-box">
-                    <h2>Bienvenido a Hoteles Trivago</h2>
-                    <p>Disfruta de una experiencia única de hospedaje. Te ofrecemos lo mejor en confort y servicios.</p>
+                    <h2>Welcome to Trivago Hotels</h2>
+                    <p>Enjoy a unique lodging experience. We offer you the best in comfort and services.</p>
                 </div>
             </div>
 
-            <!-- SERVICIOS -->
+            <!-- SERVICES -->
             <div class="service-section">
                 <div class="service-card">
-                    <asp:Image ID="imgHabitaciones" runat="server" ImageUrl="~/images/habitaciones.png" AlternateText="Habitaciones" />
-                    <h3>Habitaciones</h3>
-                    <p>Comodidad y lujo en cada habitación. Disfruta de las mejores vistas.</p>
+                    <asp:Image ID="imgHabitaciones" runat="server" ImageUrl="~/images/habitaciones.png" AlternateText="Rooms" />
+                    <h3>Rooms</h3>
+                    <p>Comfort and luxury in every room. Enjoy the best views.</p>
                 </div>
 
                 <div class="service-card">
-                    <asp:Image ID="imgRestaurante" runat="server" ImageUrl="~/images/restaurante.png" AlternateText="Restaurante" />
-                    <h3>Restaurante</h3>
-                    <p>Sabores excepcionales que hacen la diferencia.</p>
+                    <asp:Image ID="imgRestaurante" runat="server" ImageUrl="~/images/restaurante.png" AlternateText="Restaurant" />
+                    <h3>Restaurant</h3>
+                    <p>Exceptional flavors that make the difference.</p>
                 </div>
 
                 <div class="service-card">
                     <asp:Image ID="imgSpa" runat="server" ImageUrl="~/images/spa.png" AlternateText="Spa & Wellness" />
                     <h3>Spa & Wellness</h3>
-                    <p>Relájate y rejuvenece en nuestro exclusivo spa.</p>
+                    <p>Relax and rejuvenate in our exclusive spa.</p>
                 </div>
             </div>
 
@@ -241,7 +241,7 @@
 
         <!-- FOOTER -->
         <div class="footer">
-            <p>&copy; 2025 Hoteles Trivago. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Trivago Hotels. All rights reserved.</p>
         </div>
     </form>
 </body>
