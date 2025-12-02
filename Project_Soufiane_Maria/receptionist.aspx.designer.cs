@@ -24,6 +24,15 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// LabelCredentialID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCredentialID;
+
+        /// <summary>
         /// TextBoxCredentialID control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace Project_Soufiane_Maria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxCredentialID;
+
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// TextBoxUsername control.
@@ -42,6 +60,15 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.WebControls.TextBox TextBoxUsername;
 
         /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
         /// TextBoxProfile control.
         /// </summary>
         /// <remarks>
@@ -49,6 +76,15 @@ namespace Project_Soufiane_Maria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxProfile;
+
+        /// <summary>
+        /// LabelPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelPassword;
 
         /// <summary>
         /// TextBoxPassword control.
@@ -60,13 +96,31 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.WebControls.TextBox TextBoxPassword;
 
         /// <summary>
-        /// LabelMessageCredentials control.
+        /// btnRegister control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMessageCredentials;
+        protected global::System.Web.UI.WebControls.Button btnRegister;
+
+        /// <summary>
+        /// LabelMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMessage;
+
+        /// <summary>
+        /// LabelClientID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelClientID;
 
         /// <summary>
         /// TextBoxClientID control.
@@ -78,6 +132,15 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.WebControls.TextBox TextBoxClientID;
 
         /// <summary>
+        /// LabelClientName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelClientName;
+
+        /// <summary>
         /// TextBoxtName control.
         /// </summary>
         /// <remarks>
@@ -85,6 +148,15 @@ namespace Project_Soufiane_Maria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxtName;
+
+        /// <summary>
+        /// LabelDOB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDOB;
 
         /// <summary>
         /// TextBoxDOB control.
@@ -96,6 +168,15 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.WebControls.TextBox TextBoxDOB;
 
         /// <summary>
+        /// LabelAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelAddress;
+
+        /// <summary>
         /// TextBoxAddress control.
         /// </summary>
         /// <remarks>
@@ -103,6 +184,15 @@ namespace Project_Soufiane_Maria
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxAddress;
+
+        /// <summary>
+        /// LabelMobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelMobile;
 
         /// <summary>
         /// TextBoxMobile control.
@@ -114,57 +204,21 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.WebControls.TextBox TextBoxMobile;
 
         /// <summary>
-        /// LabelMessageClients control.
+        /// btnRegisterClient control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMessageClients;
+        protected global::System.Web.UI.WebControls.Button btnRegisterClient;
 
         /// <summary>
-        /// TextBoxReservationID control.
+        /// LabelClientMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxReservationID;
-
-        /// <summary>
-        /// TextBoxArrivalDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxArrivalDate;
-
-        /// <summary>
-        /// TextBoxDepartureDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxDepartureDate;
-
-        /// <summary>
-        /// TextBoxRoomType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxRoomType;
-
-        /// <summary>
-        /// LabelMessageReservations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelMessageReservations;
+        protected global::System.Web.UI.WebControls.Label LabelClientMessage;
     }
 }
