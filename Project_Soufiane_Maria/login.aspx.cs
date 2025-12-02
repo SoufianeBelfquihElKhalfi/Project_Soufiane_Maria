@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data;
 using System.Data.SQLite;
 using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-
 
 namespace Project_Soufiane_Maria
 {
@@ -16,7 +12,6 @@ namespace Project_Soufiane_Maria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void btOK_Click(object sender, EventArgs e)
@@ -60,35 +55,43 @@ namespace Project_Soufiane_Maria
                     }
 
                     // Consulta SQL para validar el usuario y la contraseña
-                    string query = "SELECT profile FROM credentials WHERE username = @username AND password = @password";
+                    string query = "SELECT profile, password FROM credentials WHERE username = @username";
 
                     using (SQLiteCommand comm = new SQLiteCommand(query, conn))
                     {
                         comm.Parameters.AddWithValue("@username", username);
-                        comm.Parameters.AddWithValue("@password", password);
 
                         using (SQLiteDataReader reader = comm.ExecuteReader())
                         {
                             if (reader.Read())
                             {
+                                string storedHashPassword = reader["password"].ToString(); // Obtener el hash de la contraseña almacenada
                                 string profile = reader["profile"].ToString();
 
-                                // Guardar la información en la sesión
-                                Session["profile"] = profile;
-                                Session["username"] = username;
+                                // Hashear la contraseña ingresada y compararla con la almacenada
+                                if (VerifyPasswordHash(password, storedHashPassword))
+                                {
+                                    // Guardar la información en la sesión
+                                    Session["profile"] = profile;
+                                    Session["username"] = username;
 
-                                // Redirigir según el perfil del usuario
-                                if (profile == "client")
-                                {
-                                    Response.Redirect("client.aspx");
-                                }
-                                else if (profile == "receptionist")
-                                {
-                                    Response.Redirect("receptionist.aspx");
+                                    // Redirigir según el perfil del usuario
+                                    if (profile == "client")
+                                    {
+                                        Response.Redirect("client.aspx");
+                                    }
+                                    else if (profile == "receptionist")
+                                    {
+                                        Response.Redirect("receptionist.aspx");
+                                    }
+                                    else
+                                    {
+                                        LabelMessage.Text = "Unknown profile.";
+                                    }
                                 }
                                 else
                                 {
-                                    LabelMessage.Text = "Unknown profile.";
+                                    LabelMessage.Text = "Wrong credentials";
                                 }
                             }
                             else
@@ -105,5 +108,32 @@ namespace Project_Soufiane_Maria
             }
         }
 
+        // Método para verificar la contraseña hasheada
+        private bool VerifyPasswordHash(string enteredPassword, string storedHashPassword)
+        {
+            // Hashear la contraseña ingresada
+            string hashedEnteredPassword = HashPassword(enteredPassword);
+
+            // Comparar el hash de la contraseña ingresada con el hash almacenado
+            return hashedEnteredPassword.Equals(storedHashPassword, StringComparison.OrdinalIgnoreCase);
+        }
+
+        // Método para hashear la contraseña usando MD5
+        private string HashPassword(string password)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                // Convertir la contraseña en bytes y calcular el hash
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convertir el array de bytes a una cadena hexadecimal
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+                return sBuilder.ToString();
+            }
+        }
     }
 }

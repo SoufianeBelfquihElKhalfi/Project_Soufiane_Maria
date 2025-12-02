@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.UI;
+
 
 namespace Project_Soufiane_Maria
 {
@@ -75,6 +78,7 @@ namespace Project_Soufiane_Maria
         }
 
         // Método para insertar al usuario en la base de datos
+        // Método para insertar al usuario en la base de datos
         public void InsertSelf(Page pageReference)
         {
             // Ruta física de database1.db
@@ -105,14 +109,17 @@ namespace Project_Soufiane_Maria
                             // ----------------------------------------------
                             // INSERT CREDENTIALS
                             // ----------------------------------------------
+                            // Hashear la contraseña
+                            string hashedPassword = HashPassword(this.Password);
+
                             cmd.CommandText = @"
-                            INSERT INTO credentials (username, profile, password)
-                            VALUES (@username, @profile, @password);";
+                    INSERT INTO credentials (username, profile, password)
+                    VALUES (@username, @profile, @password);";
 
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@username", this.Username);
                             cmd.Parameters.AddWithValue("@profile", this.Profile);
-                            cmd.Parameters.AddWithValue("@password", this.Password);  // Sin hasheo
+                            cmd.Parameters.AddWithValue("@password", hashedPassword); // Contraseña hasheada
 
                             cmd.ExecuteNonQuery();
 
@@ -120,8 +127,8 @@ namespace Project_Soufiane_Maria
                             // INSERT CLIENTS
                             // ----------------------------------------------
                             cmd.CommandText = @"
-                            INSERT INTO clients (ID, name, DOB, address, mobile)
-                            VALUES (@ID, @name, @DOB, @address, @mobile);";
+                    INSERT INTO clients (ID, name, DOB, address, mobile)
+                    VALUES (@ID, @name, @DOB, @address, @mobile);";
 
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@ID", this.Id);
@@ -145,5 +152,24 @@ namespace Project_Soufiane_Maria
                 }
             }
         }
+
+        // Método para hashear la contraseña usando MD5
+        private string HashPassword(string password)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                // Convertir la contraseña en bytes y calcular el hash
+                byte[] data = md5Hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                // Convertir el array de bytes a una cadena hexadecimal
+                var sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+                return sBuilder.ToString();
+            }
+        }
+
     }
 }
