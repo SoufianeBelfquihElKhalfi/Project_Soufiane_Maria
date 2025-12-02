@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data;
 using System.Data.SQLite;
 using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Text.RegularExpressions;
-
 
 namespace Project_Soufiane_Maria
 {
@@ -16,14 +12,13 @@ namespace Project_Soufiane_Maria
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void btOK_Click(object sender, EventArgs e)
         {
-        // Obtener los valores de usuario y contraseña
+            // Obtener los valores de usuario y contraseña
             string username = TextBox1.Text.Trim();
-        string password = TextBox2.Text.Trim();  
+            string password = TextBox2.Text.Trim();
 
             // Validar que los campos no estén vacíos
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -34,7 +29,7 @@ namespace Project_Soufiane_Maria
 
             // Regex para validar el formato de usuario y contraseña
             string usernamePattern = @"^[a-zA-Z0-9_]+$";  // Alfanumérico y guión bajo
-        string passwordPattern = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$";  // Mínimo 6 caracteres, al menos una letra y un número
+            string passwordPattern = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$";  // Mínimo 6 caracteres, al menos una letra y un número
 
             if (!Regex.IsMatch(username, usernamePattern) || !Regex.IsMatch(password, passwordPattern))
             {
@@ -42,68 +37,103 @@ namespace Project_Soufiane_Maria
                 return;
             }
 
-try
-{
-    // Ruta a la base de datos SQLite
-    string pathDB = Server.MapPath("~/database1.db");
+            try
+            {
+                // Ruta a la base de datos SQLite
+                string pathDB = Server.MapPath("~/database1.db");
+                // IMPORTANTE: Pooling=False para evitar conexiones recicladas que bloquean
+                string connectionString = "Data Source=" + pathDB + ";Version=3;Pooling=False;";
 
-    // Crear la conexión a la base de datos
-    SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;");
-    conn.Open();
+                using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
 
-    // Consulta SQL para validar el usuario y la contraseña
-    string query = "SELECT profile FROM credentials WHERE username = @username AND password = @password";
+                    // Evitar bloqueos instantáneos si está ocupada
+                    using (SQLiteCommand pragmaCmd = new SQLiteCommand("PRAGMA busy_timeout=5000;", conn))
+                    {
+                        pragmaCmd.ExecuteNonQuery();
+                    }
 
-    // Crear el comando SQL
-    SQLiteCommand comm = new SQLiteCommand(query, conn);
-    comm.Parameters.AddWithValue("@username", username);
-    comm.Parameters.AddWithValue("@password", password);
+                    // Consulta SQL para validar el usuario y la contraseña
+                    string query = "SELECT profile, password FROM credentials WHERE username = @username";
 
-    // Crear un DataReader para ejecutar la consulta
-    SQLiteDataReader reader = comm.ExecuteReader();
+                    using (SQLiteCommand comm = new SQLiteCommand(query, conn))
+                    {
+                        comm.Parameters.AddWithValue("@username", username);
 
-    // Crear un DataTable para almacenar los resultados
-    DataTable table = new DataTable();
-    table.Load(reader);
+                        using (SQLiteDataReader reader = comm.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string storedHashPassword = reader["password"].ToString(); // Obtener el hash de la contraseña almacenada
+                                string profile = reader["profile"].ToString();
 
-    // Cerrar el DataReader
-    reader.Close();
+                                // Hashear la contraseña ingresada y compararla con la almacenada
+                                if (VerifyPasswordHash(password, storedHashPassword))
+                                {
+                                    // Guardar la información en la sesión
+                                    Session["profile"] = profile;
+                                    Session["username"] = username;
 
-    // Verificar si se encontró algún usuario con las credenciales correctas
-    if (table.Rows.Count > 0)
-    {
-        // Solo debería haber una fila (un usuario)
-        DataRow row = table.Rows[0];  // Obtener la primera fila (el primer usuario)
-        string profile = row["profile"].ToString();  // Obtener el perfil del usuario
-
-        // Guardar la información en la sesión
-        Session["profile"] = profile;
-        Session["username"] = username;  // Guardar el nombre de usuario
-
-        // Redirigir según el perfil del usuario
-        if (profile == "client")
-        {
-            Response.Redirect("client.aspx");
+                                    // Redirigir según el perfil del usuario
+                                    if (profile == "client")
+                                    {
+                                        Response.Redirect("client.aspx");
+                                    }
+                                    else if (profile == "receptionist")
+                                    {
+                                        Response.Redirect("receptionist.aspx");
+                                    }
+                                    else
+                                    {
+                                        LabelMessage.Text = "Unknown profile.";
+                                    }
+                                }
+                                else
+                                {
+                                    LabelMessage.Text = "Wrong credentials";
+                                }
+                            }
+                            else
+                            {
+                                LabelMessage.Text = "Wrong credentials";
+                            }
+                        }
+                    }
+                } // aquí SIEMPRE se cierra la conexión, incluso si hay excepción dentro
+            }
+            catch (Exception ex)
+            {
+                LabelMessage.Text = "Error: " + ex.Message;
+            }
         }
-        else if (profile == "receptionist")
-        {
-            Response.Redirect("receptionist.aspx");
-        }
-    }
-    else
-    {
-        // Si no se encontró el usuario o las credenciales son incorrectas
-        LabelMessage.Text = "Wrong credentials";
-    }
 
-    // Cerrar la conexión
-    conn.Close();
-}
-catch (Exception ex)
-{
-    // En caso de error, mostrar el mensaje
-    LabelMessage.Text = "Error: " + ex.Message;
-}
+        // Método para verificar la contraseña hasheada
+        private bool VerifyPasswordHash(string enteredPassword, string storedHashPassword)
+        {
+            // Hashear la contraseña ingresada
+            string hashedEnteredPassword = HashPassword(enteredPassword);
+
+            // Comparar el hash de la contraseña ingresada con el hash almacenado
+            return hashedEnteredPassword.Equals(storedHashPassword, StringComparison.OrdinalIgnoreCase);
+        }
+
+        // Método para hashear la contraseña usando MD5
+        private string HashPassword(string password)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                // Convertir la contraseña en bytes y calcular el hash
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convertir el array de bytes a una cadena hexadecimal
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+                return sBuilder.ToString();
+            }
         }
     }
 }

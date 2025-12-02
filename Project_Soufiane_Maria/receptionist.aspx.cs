@@ -1,94 +1,103 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Project_Soufiane_Maria
 {
-	public partial class receptionist : System.Web.UI.Page
-	{
-
-        protected Label LabelUsername;
-        protected Label LabelProfile;
-        protected Button btnLogout;
-
-        //hacer inserciones y usar el codigo de hash para la contraseña
+    public partial class receptionist : System.Web.UI.Page
+    {
         protected void Page_Load(object sender, EventArgs e)
-		{
-            // Verificar si la página es un PostBack o no
+        {
             if (!IsPostBack)
             {
-                // Si no es un PostBack, significa que es la primera vez que se carga la página
                 if (Session["username"] != null && Session["profile"] != null)
                 {
-                    // Obtener los valores de la sesión
                     string username = Session["username"].ToString();
                     string profile = Session["profile"].ToString();
 
-                    // Mostrar información del usuario en la página
-                    LabelWelcome.Text = "Welcome, " + profile + " " + username;
+                    LabelUsername.Text = "Welcome, " + username;
+                    LabelProfile.Text = "Your profile is: " + profile;
 
-
-                    // También puedes usar estos datos para controlar el acceso según el perfil
                     if (profile != "receptionist")
                     {
-                        // Si el perfil no es "receptionist", redirigir a la página de login o acceso denegado
                         Response.Redirect("login.aspx");
                     }
                 }
                 else
                 {
-                    // Si no hay sesión activa, redirigir a la página de login
                     Response.Redirect("login.aspx");
                 }
             }
-            else
-            {
-                // Aquí puedes manejar cualquier lógica que necesite ser ejecutada solo en un PostBack
-            }
         }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            // Cerrar sesión, eliminar datos de la sesión
             Session.Clear();
-            Session.Abandon();  // Eliminar la sesión actual
-
-            // Redirigir al login
+            Session.Abandon();
             Response.Redirect("login.aspx");
         }
 
-        // Método para registrar las credenciales del usuario
-        protected void btnRegister_Click(object sender, EventArgs e)
+        // ÚNICO MÉTODO: registrar usuario + cliente
+        protected void btnRegisterUser_Click(object sender, EventArgs e)
         {
-            string credentialID = TextBoxCredentialID.Text.Trim();
-            string username = TextBoxUsername.Text.Trim();
-            string profile = TextBoxProfile.Text.Trim();
-            string password = TextBoxPassword.Text.Trim();
+            try
+            {
+                // Leer datos del formulario
+                string id = TextBoxID.Text.Trim();
+                string username = TextBoxUsername.Text.Trim();   // username y name
+                string profile = TextBoxProfile.Text.Trim();
+                string password = TextBoxPassword.Text.Trim();
+                string dobStr = TextBoxDOB.Text.Trim();
+                string address = TextBoxAddress.Text.Trim();
+                string mobileStr = TextBoxMobile.Text.Trim();
 
-            //regex
+                // Validación mínima
+                if (string.IsNullOrWhiteSpace(id) ||
+                    string.IsNullOrWhiteSpace(username) ||
+                    string.IsNullOrWhiteSpace(profile) ||
+                    string.IsNullOrWhiteSpace(password))
+                {
+                    LabelMessage.Text = "Please fill at least ID, username, profile and password.";
+                    return;
+                }
 
-            // Aquí podrías agregar código para guardar estos datos en la base de datos.
-            // Ejemplo: Agregar a la base de datos, etc.
-            LabelMessage.Text = "User registered successfully!";
+                DateTime dob;
+                if (!DateTime.TryParse(dobStr, out dob))
+                {
+                    LabelMessage.Text = "Invalid date format (use yyyy-mm-dd).";
+                    return;
+                }
+
+                int mobile;
+                if (!int.TryParse(mobileStr, out mobile))
+                {
+                    LabelMessage.Text = "Mobile must be numeric.";
+                    return;
+                }
+
+                // Crear objeto ClientUser
+                ClientUser nuevo = new ClientUser(
+                    username,
+                    profile,
+                    password,
+                    id,
+                    dob,
+                    address,
+                    mobile
+                );
+
+                // Insertar en la BD (credentials + clients)
+                nuevo.InsertSelf(this);
+
+                LabelMessage.ForeColor = System.Drawing.Color.Green;
+                LabelMessage.Text = "User/client successfully registered.";
+            }
+            catch (Exception ex)
+            {
+                LabelMessage.ForeColor = System.Drawing.Color.Red;
+                LabelMessage.Text = "Error while registering: " + ex.Message;
+            }
         }
-
-        // Método para registrar los datos del cliente
-        protected void btnRegisterClient_Click(object sender, EventArgs e)
-        {
-            string clientID = TextBoxClientID.Text.Trim();
-            string clientName = TextBoxtName.Text.Trim();
-            string dob = TextBoxDOB.Text.Trim();
-            string address = TextBoxAddress.Text.Trim();
-            string mobile = TextBoxMobile.Text.Trim();
-
-            //regex
-
-            // Aquí puedes agregar código para guardar los datos del cliente en la base de datos.
-            // Ejemplo: Agregar a la base de datos, etc.
-            LabelClientMessage.Text = "Client registered successfully!";
-        }
-
     }
 }
