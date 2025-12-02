@@ -7,8 +7,6 @@ namespace Project_Soufiane_Maria
 {
     public class ClientUser
     {
-    
-  
         private string username;
         private string profile;
         private string password;
@@ -17,49 +15,16 @@ namespace Project_Soufiane_Maria
         private string address;
         private int mobile;
 
-     
-        public string Username
-        {
-            get { return username; }
-            set { username = value; }
-        }
+        // Propiedades para los datos del usuario
+        public string Username { get; set; }
+        public string Profile { get; set; }
+        public string Password { get; set; }
+        public string Id { get; set; }
+        public DateTime DoB { get; set; }
+        public string Address { get; set; }
+        public int Mobile { get; set; }
 
-        public string Profile
-        {
-            get { return profile; }
-            set { profile = value; }
-        }
-
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
-
-        public string Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public DateTime DoB
-        {
-            get { return dob; }
-            set { dob = value; }
-        }
-
-        public string Address
-        {
-            get { return address; }
-            set { address = value; }
-        }
-
-        public int Mobile
-        {
-            get { return mobile; }
-            set { mobile = value; }
-        }
-
+        // Constructor para inicializar la clase
         public ClientUser(string username, string profile, string password, string id, DateTime dob, string address, int mobile)
         {
             Username = username;
@@ -71,7 +36,7 @@ namespace Project_Soufiane_Maria
             Mobile = mobile;
         }
 
-
+        // Método para obtener un cliente por nombre
         public static ClientUser GetClientByName(string name)
         {
             string pathDB = HttpContext.Current.Server.MapPath("~/database1.db");
@@ -109,6 +74,7 @@ namespace Project_Soufiane_Maria
             return user;
         }
 
+        // Método para insertar al usuario en la base de datos
         public void InsertSelf(Page pageReference)
         {
             // Ruta física de database1.db
@@ -140,13 +106,13 @@ namespace Project_Soufiane_Maria
                             // INSERT CREDENTIALS
                             // ----------------------------------------------
                             cmd.CommandText = @"
-                        INSERT INTO credentials (username, profile, password)
-                        VALUES (@username, @profile, @password);";
+                            INSERT INTO credentials (username, profile, password)
+                            VALUES (@username, @profile, @password);";
 
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@username", this.Username);
                             cmd.Parameters.AddWithValue("@profile", this.Profile);
-                            cmd.Parameters.AddWithValue("@password", this.Password);
+                            cmd.Parameters.AddWithValue("@password", this.Password);  // Sin hasheo
 
                             cmd.ExecuteNonQuery();
 
@@ -154,12 +120,12 @@ namespace Project_Soufiane_Maria
                             // INSERT CLIENTS
                             // ----------------------------------------------
                             cmd.CommandText = @"
-                        INSERT INTO clients (ID, name, DOB, address, mobile)
-                        VALUES (@ID, @name, @DOB, @address, @mobile);";
+                            INSERT INTO clients (ID, name, DOB, address, mobile)
+                            VALUES (@ID, @name, @DOB, @address, @mobile);";
 
                             cmd.Parameters.Clear();
                             cmd.Parameters.AddWithValue("@ID", this.Id);
-                            cmd.Parameters.AddWithValue("@name", this.Username); // MISMO que username
+                            cmd.Parameters.AddWithValue("@name", this.Username); // Usamos username como nombre
                             cmd.Parameters.AddWithValue("@DOB", this.DoB);
                             cmd.Parameters.AddWithValue("@address", this.Address);
                             cmd.Parameters.AddWithValue("@mobile", this.Mobile);
@@ -171,15 +137,13 @@ namespace Project_Soufiane_Maria
                         }
                         catch
                         {
+                            // Si ocurre un error, revertir la transacción
                             trans.Rollback();
-                            throw; // deja que receptionist.aspx.cs informe del error
+                            throw; // Propagar el error para que sea gestionado en el nivel superior (ej. receptionist.aspx.cs)
                         }
                     }
                 }
             }
         }
-
-
-
     }
 }
