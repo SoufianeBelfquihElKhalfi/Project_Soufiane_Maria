@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="receptionist.aspx.cs" Inherits="Project_Soufiane_Maria.receptionist" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="receptionist.aspx.cs" Inherits="Project_Soufiane_Maria.receptionist" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,7 +10,7 @@
 
         <!-- HEADER DE LA PÁGINA -->
         <div>
-            <h1>Welcome to the Receptionist Dashboard</h1>
+            
 
           <asp:Label ID="LabelUsername" runat="server" />
 <asp:Label ID="LabelProfile" runat="server" />
