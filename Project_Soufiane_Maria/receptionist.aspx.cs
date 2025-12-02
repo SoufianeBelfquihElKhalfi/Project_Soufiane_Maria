@@ -28,8 +28,8 @@ namespace Project_Soufiane_Maria
                     string profile = Session["profile"].ToString();
 
                     // Mostrar información del usuario en la página
-                    LabelUsername.Text = "Welcome, " + username;
-                    LabelProfile.Text = "Your profile is: " + profile;
+                    LabelWelcome.Text = "Welcome, " + profile + " " + username;
+
 
                     // También puedes usar estos datos para controlar el acceso según el perfil
                     if (profile != "receptionist")

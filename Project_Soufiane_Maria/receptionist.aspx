@@ -8,18 +8,16 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <h1>Welcome to the Receptionist Dashboard</h1>
+            
 
         <!-- Aquí defino los controles Label en el archivo .aspx -->
-            <asp:Label ID="LabelUsername" runat="server" Text=""></asp:Label>
-            <br />
-            <asp:Label ID="LabelProfile" runat="server" Text=""></asp:Label>
+            <h1><asp:Label ID="LabelWelcome" runat="server" Text=""></asp:Label></h1>
             <br />
 
             <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
         </div>
 
-       <!-- Registro de Credenciales, consultar insercion!! -->
+       <!-- Registro de Credenciales, se prueba logeando!! -->
         <div style="width: 360px">
             <h3>Register User Credentials</h3>
             <asp:Label ID="LabelCredentialID" runat="server" Text="ID:"></asp:Label><br />

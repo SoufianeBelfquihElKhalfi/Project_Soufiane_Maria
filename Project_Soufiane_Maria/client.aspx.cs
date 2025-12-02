@@ -9,9 +9,9 @@ namespace Project_Soufiane_Maria
 {
     public partial class client : System.Web.UI.Page
     {
-        protected Label LabelUsername;
-        protected Label LabelProfile;
         protected Button btnLogout;
+        protected Button Button1;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Verificar si la página es un PostBack o no
@@ -25,8 +25,7 @@ namespace Project_Soufiane_Maria
                     string profile = Session["profile"].ToString();
 
                     // Mostrar información del usuario en la página
-                    LabelUsername.Text = "Welcome, " + username;
-                    LabelProfile.Text = "Your profile is: " + profile;
+                    LabelWelcome.Text = "Welcome, " + profile + " " + username;
 
                     // También puedes usar estos datos para controlar el acceso según el perfil
                     if (profile != "client")
@@ -48,6 +47,11 @@ namespace Project_Soufiane_Maria
             }
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             // Cerrar sesión, eliminar datos de la sesión
@@ -57,5 +61,7 @@ namespace Project_Soufiane_Maria
             // Redirigir al login
             Response.Redirect("login.aspx");
         }
+
+
     }
 }
