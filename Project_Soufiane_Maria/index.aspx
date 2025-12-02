@@ -5,184 +5,194 @@
 <head runat="server">
     <title>Hotel</title>
     <style>
- /* Header */
-.navbar {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px; /* Reduce el padding para evitar que sobresalga */
-    border-bottom: 1px solid #e4e4e4;
-    background-color: #ffffff;
-    box-sizing: border-box; /* Asegura que el padding no haga que el header sobresalga */
-}
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-.navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('/images/foto_fondo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-.navbar-logo {
-    height: 40px;
-    width: auto;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin: 0;
+        }
 
-.navbar-title {
-    font-size: 22px;
-    font-weight: 600;
-}
+        /* HEADER */
+        .navbar {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #e4e4e4;
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
 
-/* Botón login */
-.navbar-login {
-    padding: 12px 28px;
-    background-color: #0d6efd;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-right: 20px;
-}
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-.navbar-login:hover {
-    opacity: 0.85;
-}
+        .navbar-logo {
+            height: 40px;
+            width: auto;
+        }
 
+        .navbar-title {
+            font-size: 22px;
+            font-weight: 600;
+        }
 
-/* Cuerpo */
-.main-content {
-    padding: 50px 100px;
-    background-color: #f9f9f9;
-}
+        .navbar-login {
+            padding: 12px 28px;
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
 
-/* Sección de bienvenida */
-.welcome-section {
-    text-align: center;
-    margin-bottom: 50px;
-}
+        .navbar-login:hover {
+            opacity: 0.85;
+        }
 
-.welcome-section h2 {
-    font-size: 28px;
-    font-weight: 700;
-}
+        /* CONTENIDO */
+        .main-content {
+            padding: 50px 100px;
+            flex: 1;
+            box-sizing: border-box;
+        }
 
-.welcome-section p {
-    font-size: 18px;
-    color: #555555;
-}
+        /* Sección de bienvenida */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-/* Sección de servicios */
-.service-section {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 50px;
-}
+        .welcome-box {
+            background-color: rgba(0, 0, 0, 0.55);
+            padding: 25px 35px;
+            border-radius: 12px;
+            display: inline-block;
+            text-align: center;
+        }
 
-.service-card {
-    width: 30%;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+        .welcome-box h2,
+        .welcome-box p {
+            color: #ffffff;
+            margin: 0 0 10px 0;
+        }
 
-.service-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
+        .welcome-box p:last-child {
+            margin-bottom: 0;
+        }
 
-.service-card h3 {
-    font-size: 22px;
-    margin-top: 15px;
-}
+        /* TARJETAS DE SERVICIOS */
+        .service-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
 
-.service-card p {
-    font-size: 16px;
-    color: #777;
-}
+        .service-card {
+            width: 30%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-sizing: border-box;
+        }
 
-/* Footer */
-.footer {
-    background-color: #333;
-    color: #ffffff;
-    padding: 30px;
-    text-align: center;
-    margin-top: 50px;
-}
+        .service-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
 
-.footer p {
-    margin: 0;
-    font-size: 14px;
-}
+        .service-card h3 {
+            font-size: 22px;
+            margin-top: 15px;
+            color: #333;
+        }
 
-/* Media Queries para dispositivos móviles */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0 20px;
-    }
+        .service-card p {
+            font-size: 16px;
+            color: #777;
+        }
 
-    .navbar-title {
-        font-size: 18px;
-    }
+        /* FOOTER */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-    .navbar-login {
-        padding: 10px 20px;
-        font-size: 14px;
-        margin-right: 10px;
-    }
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+        }
 
-    .main-content {
-        padding: 20px;
-    }
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px;
+            }
 
-    .service-section {
-        flex-direction: column;
-        align-items: center;
-    }
+            .service-section {
+                flex-direction: column;
+                align-items: center;
+            }
 
-    .service-card {
-        width: 80%;
-        margin-bottom: 30px;
-    }
+            .service-card {
+                width: 80%;
+            }
 
-    .footer {
-        padding: 20px;
-    }
-}
+            .navbar-title {
+                font-size: 18px;
+            }
+        }
 
-@media (max-width: 480px) {
-    .navbar {
-        flex-direction: column;
-        padding: 10px;
-        height: auto;
-    }
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
 
-    .navbar-left {
-        justify-content: center;
-        margin-bottom: 10px;
-    }
+            .navbar-left {
+                margin-bottom: 10px;
+            }
 
-    .navbar-title {
-        font-size: 16px;
-    }
+            .navbar-title {
+                font-size: 16px;
+            }
 
-    .navbar-login {
-        font-size: 14px;
-        padding: 10px 20px;
-        margin-top: 10px;
-    }
-
-    .service-card {
-        width: 90%;
-    }
-}
-
+            .service-card {
+                width: 90%;
+            }
+        }
 
     </style>
 </head>
@@ -195,15 +205,18 @@
             </div>
             <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" CssClass="navbar-login" OnClick="btnLogin_Click" />
         </header>
-        <!-- Cuerpo de la página -->
-<div class="main-content">
-            <!-- Sección de bienvenida -->
+
+        <div class="main-content">
+
+            <!-- BIENVENIDA -->
             <div class="welcome-section">
-                <h2>Bienvenido a Hoteles Trivago</h2>
-                <p>Disfruta de una experiencia única de hospedaje. Te ofrecemos lo mejor en confort y servicios.</p>
+                <div class="welcome-box">
+                    <h2>Bienvenido a Hoteles Trivago</h2>
+                    <p>Disfruta de una experiencia única de hospedaje. Te ofrecemos lo mejor en confort y servicios.</p>
+                </div>
             </div>
 
-            <!-- Sección de servicios -->
+            <!-- SERVICIOS -->
             <div class="service-section">
                 <div class="service-card">
                     <asp:Image ID="imgHabitaciones" runat="server" ImageUrl="~/images/habitaciones.png" AlternateText="Habitaciones" />
@@ -223,14 +236,13 @@
                     <p>Relájate y rejuvenece en nuestro exclusivo spa.</p>
                 </div>
             </div>
+
         </div>
 
-        <!-- Footer -->
-<div class="footer">
-    <p>&copy; 2025 Hoteles Trivago. Todos los derechos reservados.</p>
-</div>
-
-
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>&copy; 2025 Hoteles Trivago. Todos los derechos reservados.</p>
+        </div>
     </form>
 </body>
 </html>
