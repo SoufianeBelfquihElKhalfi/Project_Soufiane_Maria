@@ -10,6 +10,13 @@
     <form id="form1" runat="server">
         <div>
             <h1>Welcome Client</h1>
+            <!-- Aquí defino los controles Label en el archivo .aspx -->
+            <asp:Label ID="LabelUsername" runat="server" Text=""></asp:Label>
+            <br />
+            <asp:Label ID="LabelProfile" runat="server" Text=""></asp:Label>
+            <br />
+
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
         </div>
     </form>
 </body>

@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
+
 
 namespace Project_Soufiane_Maria
 {
@@ -17,84 +19,91 @@ namespace Project_Soufiane_Maria
 
         }
 
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-
-            //string username = TextBox1.Text.Trim();  
-            //string password = TextBox2.Text.Trim();
-            //try
-            //{
-            //    // Ruta a la base de datos SQLite
-            //    string pathDB = Server.MapPath("~/database.sqbpro");
-
-            //    // Crear la conexión a la base de datos usando 'using' para asegurar que se cierre automáticamente
-            //    using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB))
-            //    {
-            //        conn.Open();
-
-            //        // Preparar la consulta SQL para comprobar el usuario y la contraseña
-            //        string query = "SELECT COUNT(*) FROM users WHERE name = @username AND password = @password";
-
-            //        using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
-            //        {
-            //            // Usar parámetros para evitar inyecciones SQL
-            //            cmd.Parameters.AddWithValue("@username", username);  // Usuario (DNI)
-            //            cmd.Parameters.AddWithValue("@password", password);  // Contraseña
-
-            //            int userCount = Convert.ToInt32(cmd.ExecuteScalar());
-
-                        
-            //        }
-            //    }  // La conexión se cierra automáticamente aquí al salir del bloque 'using'
-            //}
-            //catch (Exception ex)
-            //{
-            //    // Mostrar un mensaje en caso de error
-            //    LabelMessage.Text = "Error: " + ex.Message;
-            //}
-        }
-
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btOK_Click(object sender, EventArgs e)
         {
+        // Obtener los valores de usuario y contraseña
             string username = TextBox1.Text.Trim();
-            string password = TextBox2.Text.Trim();
-            try
+        string password = TextBox2.Text.Trim();  
+
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                // Ruta a la base de datos SQLite
-                string pathDB = Server.MapPath("~/database1.sqbpro");
-
-                // Crear la conexión a la base de datos usando 'using' para asegurar que se cierre automáticamente
-                using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB))
-                {
-                    conn.Open();
-
-                    // Preparar la consulta SQL para comprobar el usuario y la contraseña
-                    string query = "SELECT COUNT(*) FROM users WHERE name = @username AND password = @password";
-
-
-                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
-                    {
-                        
-
-                        Response.Redirect($"client.aspx");
-                    }
-                }  // La conexión se cierra automáticamente aquí al salir del bloque 'using'
+                LabelMessage.Text = "Please enter both username and password.";
+                return;
             }
-            catch (Exception ex)
+
+            // Regex para validar el formato de usuario y contraseña
+            string usernamePattern = @"^[a-zA-Z0-9_]+$";  // Alfanumérico y guión bajo
+        string passwordPattern = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$";  // Mínimo 6 caracteres, al menos una letra y un número
+
+            if (!Regex.IsMatch(username, usernamePattern) || !Regex.IsMatch(password, passwordPattern))
             {
-            //    // Mostrar un mensaje en caso de error
-                LabelMessage.Text = "Error: " + ex.Message;
+                LabelMessage.Text = "Invalid username or password format.";
+                return;
             }
+
+try
+{
+    // Ruta a la base de datos SQLite
+    string pathDB = Server.MapPath("~/database1.db");
+
+    // Crear la conexión a la base de datos
+    SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;");
+    conn.Open();
+
+    // Consulta SQL para validar el usuario y la contraseña
+    string query = "SELECT profile FROM credentials WHERE username = @username AND password = @password";
+
+    // Crear el comando SQL
+    SQLiteCommand comm = new SQLiteCommand(query, conn);
+    comm.Parameters.AddWithValue("@username", username);
+    comm.Parameters.AddWithValue("@password", password);
+
+    // Crear un DataReader para ejecutar la consulta
+    SQLiteDataReader reader = comm.ExecuteReader();
+
+    // Crear un DataTable para almacenar los resultados
+    DataTable table = new DataTable();
+    table.Load(reader);
+
+    // Cerrar el DataReader
+    reader.Close();
+
+    // Verificar si se encontró algún usuario con las credenciales correctas
+    if (table.Rows.Count > 0)
+    {
+        // Solo debería haber una fila (un usuario)
+        DataRow row = table.Rows[0];  // Obtener la primera fila (el primer usuario)
+        string profile = row["profile"].ToString();  // Obtener el perfil del usuario
+
+        // Guardar la información en la sesión
+        Session["profile"] = profile;
+        Session["username"] = username;  // Guardar el nombre de usuario
+
+        // Redirigir según el perfil del usuario
+        if (profile == "client")
+        {
+            Response.Redirect("client.aspx");
+        }
+        else if (profile == "receptionist")
+        {
+            Response.Redirect("receptionist.aspx");
+        }
+    }
+    else
+    {
+        // Si no se encontró el usuario o las credenciales son incorrectas
+        LabelMessage.Text = "Wrong credentials";
+    }
+
+    // Cerrar la conexión
+    conn.Close();
+}
+catch (Exception ex)
+{
+    // En caso de error, mostrar el mensaje
+    LabelMessage.Text = "Error: " + ex.Message;
+}
         }
     }
 }
