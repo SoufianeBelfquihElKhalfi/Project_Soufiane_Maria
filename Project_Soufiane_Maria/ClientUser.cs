@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Web;
+using System.Web.UI;
 
 namespace Project_Soufiane_Maria
 {
@@ -107,6 +108,77 @@ namespace Project_Soufiane_Maria
 
             return user;
         }
+
+        public void InsertSelf(Page pageReference)
+        {
+            // Ruta física de database1.db
+            string pathDB = pageReference.Server.MapPath("~/database1.db");
+
+            // Pooling desactivado para evitar bloqueos
+            string connectionString = "Data Source=" + pathDB + ";Version=3;Pooling=False;";
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                // Evita que SQLite lance "database is locked" instantáneamente
+                using (SQLiteCommand pragmaCmd = new SQLiteCommand("PRAGMA busy_timeout=5000;", conn))
+                {
+                    pragmaCmd.ExecuteNonQuery();
+                }
+
+                // Transacción para insertar en ambas tablas de forma atómica
+                using (SQLiteTransaction trans = conn.BeginTransaction())
+                {
+                    using (SQLiteCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.Transaction = trans;
+
+                        try
+                        {
+                            // ----------------------------------------------
+                            // INSERT CREDENTIALS
+                            // ----------------------------------------------
+                            cmd.CommandText = @"
+                        INSERT INTO credentials (username, profile, password)
+                        VALUES (@username, @profile, @password);";
+
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@username", this.Username);
+                            cmd.Parameters.AddWithValue("@profile", this.Profile);
+                            cmd.Parameters.AddWithValue("@password", this.Password);
+
+                            cmd.ExecuteNonQuery();
+
+                            // ----------------------------------------------
+                            // INSERT CLIENTS
+                            // ----------------------------------------------
+                            cmd.CommandText = @"
+                        INSERT INTO clients (ID, name, DOB, address, mobile)
+                        VALUES (@ID, @name, @DOB, @address, @mobile);";
+
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@ID", this.Id);
+                            cmd.Parameters.AddWithValue("@name", this.Username); // MISMO que username
+                            cmd.Parameters.AddWithValue("@DOB", this.DoB);
+                            cmd.Parameters.AddWithValue("@address", this.Address);
+                            cmd.Parameters.AddWithValue("@mobile", this.Mobile);
+
+                            cmd.ExecuteNonQuery();
+
+                            // Commit final
+                            trans.Commit();
+                        }
+                        catch
+                        {
+                            trans.Rollback();
+                            throw; // deja que receptionist.aspx.cs informe del error
+                        }
+                    }
+                }
+            }
+        }
+
 
 
     }
