@@ -1,0 +1,134 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9ecef;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: darkslateblue;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.header-btn {
+    background-color: white;
+    color: darkslateblue;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+    .header-btn:hover {
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 50px 30px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 25px;
+    width: 320px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+    .card h2 {
+        color: darkslateblue;
+        margin-bottom: 25px;
+        font-size: 22px;
+        border-bottom: 2px solid cornflowerblue;
+        padding-bottom: 6px;
+    }
+
+.label {
+    font-weight: bold;
+    color: darkslateblue;
+    margin-right: 6px;
+    display: inline-block;
+    width: 75px;
+}
+
+.reservations-listbox {
+    width: 100%;
+    height: 140px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1.5px solid darkslateblue;
+    padding: 4px;
+    color: #2c3e50;
+    cursor: pointer;
+}
+
+/* Estilos form Login */
+
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: darkslateblue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+    .btn:hover {
+        background-color: cornflowerblue;
+    }
+
+br {
+    margin: 5px 0;
+}
+
+.LabelMessage {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+}

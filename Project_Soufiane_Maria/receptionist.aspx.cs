@@ -88,7 +88,7 @@ namespace Project_Soufiane_Maria
             {
                 string id = TextBoxID.Text.Trim();
                 string username = TextBoxUsername.Text.Trim();
-                string profile = TextBoxProfile.Text.Trim();
+                string profile = "client";
                 string password = TextBoxPassword.Text.Trim();
                 string dobStr = TextBoxDOB.Text.Trim();
                 string address = TextBoxAddress.Text.Trim();
