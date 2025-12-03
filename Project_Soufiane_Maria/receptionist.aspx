@@ -41,8 +41,7 @@
             <asp:Label ID="LabelMobile" runat="server" Text="Mobile Phone:"></asp:Label><br />
             <asp:TextBox ID="TextBoxMobile" runat="server"></asp:TextBox><br /><br />
 
-            <asp:Button ID="btnRegisterUser" runat="server" Text="Register User / Client"
-                OnClick="btnRegisterUser_Click" />
+            <asp:Button ID="btnRegisterUser" runat="server" Text="Register User / Client" OnClick="btnRegisterUser_Click" />
             <br /><br />
 
             <asp:Label ID="LabelMessage" runat="server" ForeColor="Red"></asp:Label>
@@ -65,6 +64,34 @@
             <br /><br />
             <asp:Label ID="LabelSelectedClient" runat="server" />
         </div>
+
+        <!-- SECCIÓN PARA MOSTRAR TODAS LAS HABITACIONES -->
+        <div style="width: 360px; margin-top: 30px;">
+            <h3>All Rooms</h3>
+
+            <!-- ListBox para mostrar todas las habitaciones -->
+            <asp:ListBox ID="ListBoxRooms" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ListBoxRooms_SelectedIndexChanged" style="width: 100%; height: 200px;">
+                <asp:ListItem Text="Select Room" Value="" />
+            </asp:ListBox>
+
+            <br /><br />
+            <asp:Label ID="LabelSelectedRoom" runat="server" />
+        </div>
+
+        <!-- Formulario para fechas de llegada y salida -->
+<div style="width: 360px; margin-top: 30px;">
+    <h3>Reservation Dates</h3>
+
+    <asp:Label ID="LabelArrival" runat="server" Text="Arrival Date:"></asp:Label><br />
+    <asp:TextBox ID="TextBoxArrival" runat="server" TextMode="Date" /><br /><br />
+
+    <asp:Label ID="LabelDeparture" runat="server" Text="Departure Date:"></asp:Label><br />
+    <asp:TextBox ID="TextBoxDeparture" runat="server" TextMode="Date" /><br /><br />
+
+    <asp:Button ID="btnCreateReservation" runat="server" Text="Create Reservation" OnClick="btnCreateReservation_Click" />
+</div>
+
+
 
     </form>
 </body>
