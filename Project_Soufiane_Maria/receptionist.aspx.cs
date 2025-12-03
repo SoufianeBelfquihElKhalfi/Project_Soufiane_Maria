@@ -245,14 +245,14 @@ namespace Project_Soufiane_Maria
 
         protected void btnCreateReservation_Click(object sender, EventArgs e)
         {
-            // Obtener el ID del cliente seleccionado
-            string clientId = ListBoxClients.SelectedValue;
+            // Obtener el nombre del cliente seleccionado
+            string clientName = ListBoxClients.SelectedValue;
 
             // Obtener el ID de la habitación seleccionada
             string roomId = ListBoxRooms.SelectedValue;
 
             // Verificar si ambos campos fueron seleccionados correctamente
-            if (string.IsNullOrEmpty(clientId) || string.IsNullOrEmpty(roomId))
+            if (string.IsNullOrEmpty(clientName) || string.IsNullOrEmpty(roomId))
             {
                 LabelSelectedClient.Text = "Please select both a client and a room.";
                 return;
@@ -266,6 +266,15 @@ namespace Project_Soufiane_Maria
             if (!DateTime.TryParse(TextBoxArrival.Text, out arrivalDate) || !DateTime.TryParse(TextBoxDeparture.Text, out departureDate))
             {
                 LabelSelectedClient.Text = "Please enter valid arrival and departure dates.";
+                return;
+            }
+
+            // Obtener el DNI del cliente desde la base de datos usando el nombre del cliente
+            string clientId = GetClientDNI(clientName);
+
+            if (string.IsNullOrEmpty(clientId))
+            {
+                LabelSelectedClient.Text = "Client not found.";
                 return;
             }
 
@@ -292,7 +301,7 @@ namespace Project_Soufiane_Maria
                         // Añadir los parámetros necesarios
                         cmd.Parameters.AddWithValue("@arrival", arrivalDate);
                         cmd.Parameters.AddWithValue("@departure", departureDate);
-                        cmd.Parameters.AddWithValue("@client_id", clientId);
+                        cmd.Parameters.AddWithValue("@client_id", clientId);  // Usar el DNI del cliente
                         cmd.Parameters.AddWithValue("@room_id", roomId);
 
                         // Ejecutar la inserción
@@ -308,8 +317,44 @@ namespace Project_Soufiane_Maria
                 // Manejar cualquier error
                 LabelSelectedClient.Text = "Error creating reservation: " + ex.Message;
             }
-
         }
+
+        private string GetClientDNI(string clientName)
+        {
+            string clientId = null;
+            string pathDB = Server.MapPath("~/database1.db"); // Ruta a la base de datos
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;"))
+                {
+                    conn.Open();
+                    string query = "SELECT ID FROM clients WHERE name = @name";  // Suponiendo que "name" es el nombre de usuario
+
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@name", clientName);  // Usamos el nombre de usuario para obtener el DNI
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                clientId = reader["ID"].ToString();  // Obtenemos el DNI del cliente
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier error
+                LabelSelectedClient.Text = "Error fetching client ID: " + ex.Message;
+            }
+
+            return clientId;
+        }
+
+
 
 
 

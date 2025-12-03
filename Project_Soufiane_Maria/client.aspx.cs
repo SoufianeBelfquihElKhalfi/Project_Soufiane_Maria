@@ -16,12 +16,12 @@ namespace Project_Soufiane_Maria
         protected Label LabelDeparture;
         protected Label LabelRoom;
         protected Label LabelUser;
+        protected ListBox ReservationsList;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Comprobamos que hay sesión
                 if (Session["username"] != null && Session["profile"] != null)
                 {
                     string username = Session["username"].ToString();
@@ -31,15 +31,9 @@ namespace Project_Soufiane_Maria
 
                     if (profile != "client")
                     {
-                        // Si el perfil no es "client", redirigir a la página de login o acceso denegado
                         Response.Redirect("login.aspx");
                     }
 
-
-                    // ============================
-                    // OBTENER DATOS DEL CLIENTE
-                    // ============================
-                    // Suponemos que en la tabla clients.name se guarda el mismo valor que username
                     ClientUser clientData = ClientUser.GetClientByName(username);
 
                     if (clientData != null)
@@ -51,58 +45,56 @@ namespace Project_Soufiane_Maria
                     }
                     else
                     {
-                        // Si no hay datos en clients, lo indicamos
                         LabelId.Text = "No client data found in table 'clients'.";
                         LabelDob.Text = string.Empty;
                         LabelAddress.Text = string.Empty;
                         LabelMobile.Text = string.Empty;
                     }
 
-                    // ============================
-                    // OBTENER RESERVAS DEL CLIENTE
-                    // ============================
                     GetReservationsByClient(clientData.Id);
                 }
                 else
                 {
-                    // Sin sesión → login
                     Response.Redirect("login.aspx");
                 }
             }
         }
 
+
         private void GetReservationsByClient(string clientId)
         {
             string pathDB = Server.MapPath("~/database1.db");
+            ReservationsList.Items.Clear();
 
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;"))
+            using (var conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;"))
             {
                 conn.Open();
-
-                string query = @"SELECT arrival, departure, room_id 
-                         FROM reservations 
-                         WHERE client_id = @client_id";
-
-                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                string query = @"SELECT id, arrival, departure, room_id 
+                                 FROM reservations 
+                                 WHERE client_id = @client_id
+                                 ORDER BY arrival";
+                using (var cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@client_id", clientId);
-
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.HasRows)
                         {
-                            reader.Read(); // primera reserva
-
-                            LabelArrival.Text = "Arrival: " +
-                                Convert.ToDateTime(reader["arrival"]).ToShortDateString();
-
-                            LabelDeparture.Text = "Departure: " +
-                                Convert.ToDateTime(reader["departure"]).ToShortDateString();
-
-                            LabelRoom.Text = "Room ID: " + reader["room_id"].ToString();
+                            while (reader.Read())
+                            {
+                                string id = reader["id"].ToString();
+                                string arrival = Convert.ToDateTime(reader["arrival"]).ToShortDateString();
+                                string departure = Convert.ToDateTime(reader["departure"]).ToShortDateString();
+                                string room = reader["room_id"].ToString();
+                                string text = $"{arrival} - {departure} (Room {room})";
+                                ReservationsList.Items.Add(new ListItem(text, id));
+                            }
+                            ReservationsList.SelectedIndex = 0;
+                            LoadReservationDetails(ReservationsList.SelectedValue);
                         }
                         else
                         {
+                            ReservationsList.Items.Add(new ListItem("No reservations found", "-1"));
                             LabelArrival.Text = "No reservations found.";
                             LabelDeparture.Text = "";
                             LabelRoom.Text = "";
@@ -112,13 +104,56 @@ namespace Project_Soufiane_Maria
             }
         }
 
+        private void LoadReservationDetails(string reservationId)
+        {
+            if (string.IsNullOrEmpty(reservationId) || reservationId == "-1")
+            {
+                LabelArrival.Text = "No reservations found.";
+                LabelDeparture.Text = "";
+                LabelRoom.Text = "";
+                return;
+            }
+
+            string pathDB = Server.MapPath("~/database1.db");
+            using (var conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;"))
+            {
+                conn.Open();
+                string query = @"SELECT arrival, departure, room_id 
+                                 FROM reservations 
+                                 WHERE id = @id LIMIT 1";
+                using (var cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", reservationId);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            LabelArrival.Text = "Arrival: " + Convert.ToDateTime(reader["arrival"]).ToShortDateString();
+                            LabelDeparture.Text = "Departure: " + Convert.ToDateTime(reader["departure"]).ToShortDateString();
+                            LabelRoom.Text = "Room ID: " + reader["room_id"].ToString();
+                        }
+                        else
+                        {
+                            LabelArrival.Text = "Reservation not found.";
+                            LabelDeparture.Text = "";
+                            LabelRoom.Text = "";
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void ReservationsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["SelectedReservation"] = ReservationsList.SelectedValue;
+            LoadReservationDetails(ReservationsList.SelectedValue);
+        }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Session.Abandon();
             Response.Redirect("login.aspx");
         }
-
-
     }
 }
