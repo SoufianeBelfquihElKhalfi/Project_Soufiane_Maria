@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -38,7 +39,7 @@ namespace Project_Soufiane_Maria
             Response.Redirect("login.aspx");
         }
 
-        // ÚNICO MÉTODO: registrar usuario + cliente
+        // Método para registrar usuario + cliente
         protected void btnRegisterUser_Click(object sender, EventArgs e)
         {
             try
@@ -97,6 +98,58 @@ namespace Project_Soufiane_Maria
             {
                 LabelMessage.ForeColor = System.Drawing.Color.Red;
                 LabelMessage.Text = "Error while registering: " + ex.Message;
+            }
+        }
+
+        // Método para realizar la búsqueda de clientes por nombre
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            string searchFragment = TextBoxSearch.Text.Trim();
+
+            if (!string.IsNullOrWhiteSpace(searchFragment))
+            {
+                // Buscar clientes por nombre (fragmento)
+                List<ClientUser> clients = ClientUser.SearchClientsByName(searchFragment);
+
+                // Limpiar el ListBox antes de llenarlo
+                ListBoxClients.Items.Clear();
+
+                // Llenar el ListBox con los resultados de la búsqueda
+                foreach (ClientUser client in clients)
+                {
+                    string clientInfo = $"{client.Username} | {client.Address} | {client.Mobile}";
+                    ListBoxClients.Items.Add(new ListItem(clientInfo, client.Username));
+                }
+
+                // Si no se encuentran clientes, mostrar mensaje
+                if (clients.Count == 0)
+                {
+                    LabelSelectedClient.Text = "No clients found.";
+                }
+            }
+            else
+            {
+                // Si el campo de búsqueda está vacío, vaciar el ListBox
+                ListBoxClients.Items.Clear();
+                ListBoxClients.Items.Add(new ListItem("Select Client", ""));
+            }
+        }
+
+        // Método para manejar la selección de un cliente desde el ListBox
+        protected void ListBoxClients_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ListBoxClients.SelectedIndex > 0)
+            {
+                string clientName = ListBoxClients.SelectedItem.Text.Split('|')[0].Trim();
+                ClientUser selectedClient = ClientUser.GetClientByName(clientName);
+
+                // Mostrar la información del cliente seleccionado
+                LabelSelectedClient.Text = $"Selected Client: {selectedClient.Username}, " +
+                                          $"Address: {selectedClient.Address}, Mobile: {selectedClient.Mobile}";
+            }
+            else
+            {
+                LabelSelectedClient.Text = string.Empty;
             }
         }
     }

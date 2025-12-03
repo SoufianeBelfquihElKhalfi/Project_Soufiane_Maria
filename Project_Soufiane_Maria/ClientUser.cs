@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Security.Cryptography;
 using System.Text;
@@ -170,6 +171,65 @@ namespace Project_Soufiane_Maria
                 return sBuilder.ToString();
             }
         }
+
+        public ClientUser(string name, DateTime dob, string address, int mobile)
+        {
+            Username = name;
+            DoB = dob;
+            Address = address;
+            Mobile = mobile;
+            Profile = "";  // Perfil vacío por ahora, ya que no lo estamos utilizando
+            Password = ""; // Contraseña vacía por ahora, ya que no la estamos utilizando en este constructor
+            Id = ""; // El ID también se puede dejar vacío
+        }
+
+        public static List<ClientUser> SearchClientsByName(string nameFragment)
+        {
+            string pathDB = HttpContext.Current.Server.MapPath("~/database1.db");
+            string connectionString = "Data Source=" + pathDB + ";Version=3;";
+            List<ClientUser> clients = new List<ClientUser>();
+
+            string sql = @"SELECT name, DOB, address, mobile, ID 
+                   FROM clients 
+                   WHERE name LIKE @nameFragment";  // Búsqueda por fragmento de nombre
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@nameFragment", "%" + nameFragment + "%");
+
+                conn.Open();
+
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ClientUser client = new ClientUser(
+                            reader["name"].ToString(),
+                            "", // profile no está en esta tabla
+                            "", // password no está en esta tabla
+                            reader["ID"].ToString(),
+                            Convert.ToDateTime(reader["DOB"]),
+                            reader["address"].ToString(),
+                            Convert.ToInt32(reader["mobile"])
+                        );
+
+                        clients.Add(client);
+                    }
+                }
+            }
+
+            return clients;
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }
