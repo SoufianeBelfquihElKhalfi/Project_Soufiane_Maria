@@ -7,6 +7,7 @@ namespace Project_Soufiane_Maria
 {
     public partial class client : System.Web.UI.Page
     {
+        protected Label LabelWelcome;
         protected Label LabelId;
         protected Label LabelDob;
         protected Label LabelAddress;
