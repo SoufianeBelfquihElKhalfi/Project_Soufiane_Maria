@@ -1,5 +1,4 @@
 using System;
-using System.Data.SQLite;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,7 +13,7 @@ namespace Project_Soufiane_Maria
         protected Label LabelArrival;      
         protected Label LabelDeparture;
         protected Label LabelRoom; 
-        protected Label LabelUser;
+        protected Label LabelDNI;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +25,7 @@ namespace Project_Soufiane_Maria
                     string username = Session["username"].ToString();
                     string profile = Session["profile"].ToString();
 
-                    LabelWelcome.Text = "Welcome, " + profile + " " + username;
+                  //  LabelWelcome.Text = "Welcome, " + profile + " " + username;
 
                     if (profile != "client")
                     {
@@ -57,10 +56,6 @@ namespace Project_Soufiane_Maria
                         LabelMobile.Text = string.Empty;
                     }
 
-                    // ============================
-                    // OBTENER RESERVAS DEL CLIENTE
-                    // ============================
-                    GetReservationsByClient(clientData.Id);
                 }
                 else
                 {
@@ -69,48 +64,6 @@ namespace Project_Soufiane_Maria
                 }
             }
         }
-
-        private void GetReservationsByClient(string clientId)
-        {
-            string pathDB = Server.MapPath("~/database1.db");
-
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + pathDB + ";Version=3;"))
-            {
-                conn.Open();
-
-                string query = @"SELECT arrival, departure, room_id 
-                         FROM reservations 
-                         WHERE client_id = @client_id";
-
-                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@client_id", clientId);
-
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            reader.Read(); // primera reserva
-
-                            LabelArrival.Text = "Arrival: " +
-                                Convert.ToDateTime(reader["arrival"]).ToShortDateString();
-
-                            LabelDeparture.Text = "Departure: " +
-                                Convert.ToDateTime(reader["departure"]).ToShortDateString();
-
-                            LabelRoom.Text = "Room ID: " + reader["room_id"].ToString();
-                        }
-                        else
-                        {
-                            LabelArrival.Text = "No reservations found.";
-                            LabelDeparture.Text = "";
-                            LabelRoom.Text = "";
-                        }
-                    }
-                }
-            }
-        }
-
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();

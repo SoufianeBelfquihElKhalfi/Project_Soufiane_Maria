@@ -63,6 +63,8 @@
 
         .right-div {
             flex: 1;
+            display: flex;
+            justify-content: center;
         }
 
         .btn {
@@ -85,7 +87,7 @@
     <form id="form1" runat="server">
         <header>
             <div class="header-welcome">
-                <asp:Label ID="LabelWelcome" runat="server" Text="Welcome!"></asp:Label>
+                <asp:Label ID="LabelWelcome" runat="server" Text="Welcome, user!"></asp:Label>
             </div>
             <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="header-btn" />
         </header>
@@ -102,7 +104,7 @@
                 <asp:Label ID="LabelArrival" runat="server" ></asp:Label><br />
 <asp:Label ID="LabelDeparture" runat="server" ></asp:Label><br />
 <asp:Label ID="LabelRoom" runat="server"></asp:Label><br />
-<asp:Label ID="LabelUser" runat="server"></asp:Label><br />
+<asp:Label ID="LabelDNI" runat="server"></asp:Label><br />
             </div>
         </div>
     </form>
