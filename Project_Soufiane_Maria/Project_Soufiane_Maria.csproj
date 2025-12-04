@@ -84,6 +84,7 @@
     <Compile Include="client.aspx.designer.cs">
       <DependentUpon>client.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClientUser.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

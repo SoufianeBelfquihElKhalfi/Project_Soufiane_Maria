@@ -156,6 +156,8 @@
                     <asp:ListItem Text="Select Client" Value="" />
                 </asp:ListBox>
 
+                <asp:Button ID="btnDeleteClient" runat="server" Text="Delete Selected Client" OnClick="btnDeleteClient_Click" style="background-color: #dc3545; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;" /><br /><br />
+
                 <br /><br />
                 <asp:Label ID="LabelSelectedClient" runat="server" />
             </div>

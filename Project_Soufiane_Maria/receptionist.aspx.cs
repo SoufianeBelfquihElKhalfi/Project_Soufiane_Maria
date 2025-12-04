@@ -354,6 +354,106 @@ namespace Project_Soufiane_Maria
             return clientId;
         }
 
+        // Dentro de la clase 'receptionist : System.Web.UI.Page'
+
+        protected void btnDeleteClient_Click(object sender, EventArgs e)
+        {
+            // Verificar si un cliente está seleccionado
+            if (ListBoxClients.SelectedIndex < 0 || string.IsNullOrEmpty(ListBoxClients.SelectedValue))
+            {
+                LabelSelectedClient.Text = "Please select a client to delete.";
+                LabelSelectedClient.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+
+            // El ListBoxClients usa el Username como SelectedValue
+            string clientUsername = ListBoxClients.SelectedValue;
+
+            try
+            {
+                // 1. Obtener la información completa del cliente (incluyendo ID)
+                ClientUser clientToDelete = ClientUser.GetClientByName(clientUsername);
+
+                if (clientToDelete == null)
+                {
+                    LabelSelectedClient.Text = $"Error: Client '{clientUsername}' not found in database.";
+                    LabelSelectedClient.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
+                // 2. Llamar al método auxiliar para realizar la eliminación en la DB
+                DeleteClient(clientToDelete);
+
+                // 3. Actualizar la interfaz de usuario
+                LabelSelectedClient.Text = $"Client '{clientUsername}' deleted successfully.";
+                LabelSelectedClient.ForeColor = System.Drawing.Color.Green;
+
+                // Recargar la lista de clientes para que desaparezca el eliminado
+                btnSearch_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                LabelSelectedClient.Text = "Deletion Error: " + ex.Message;
+                LabelSelectedClient.ForeColor = System.Drawing.Color.Red;
+            }
+        }
+
+        // Dentro de la clase 'receptionist : System.Web.UI.Page'
+
+        /// <summary>
+        /// Realiza la eliminación transaccional de un cliente de las tablas 'clients' y 'credentials'.
+        /// </summary>
+        /// <param name="user">El objeto ClientUser a eliminar.</param>
+        private void DeleteClient(ClientUser user)
+        {
+            string pathDB = Server.MapPath("~/database1.db");
+            string connectionString = "Data Source=" + pathDB + ";Version=3;Pooling=False;";
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                // Configurar el timeout de ocupado (Buena práctica para evitar 'database is locked')
+                using (SQLiteCommand pragmaCmd = new SQLiteCommand("PRAGMA busy_timeout=5000;", conn))
+                {
+                    pragmaCmd.ExecuteNonQuery();
+                }
+
+                // Transacción para asegurar la atomicidad (ambos borrados se hacen o ninguno)
+                using (SQLiteTransaction trans = conn.BeginTransaction())
+                {
+                    using (SQLiteCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.Transaction = trans;
+
+                        try
+                        {
+                            // 1. DELETE CLIENTS (Usando ID)
+                            cmd.CommandText = "DELETE FROM clients WHERE ID = @ID;";
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@ID", user.Id);
+                            cmd.ExecuteNonQuery();
+
+                            // 2. DELETE CREDENTIALS (Usando username)
+                            cmd.CommandText = "DELETE FROM credentials WHERE username = @username;";
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@username", user.Username);
+                            cmd.ExecuteNonQuery();
+
+                            // 3. Commit final
+                            trans.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Rollback en caso de error
+                            trans.Rollback();
+                            throw new Exception("The user could not be deleted from the database. Transaction reverted.", ex);
+                        }
+                    }
+                }
+            }
+        }
+
 
 
 
