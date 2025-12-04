@@ -11,7 +11,7 @@
         <header class="navbar">
             <div class="navbar-left">
                 <asp:Image ID="imgLogo" runat="server" ImageUrl="~/images/logo.png" CssClass="navbar-logo" />
-                <asp:Label ID="lblTitulo" runat="server" Text="Trivago Hotels" CssClass="navbar-title" />
+                <asp:Label ID="lblTitulo" runat="server" Text="UPV Hotels" CssClass="navbar-title" />
             </div>
             <asp:Button ID="btnLogin" runat="server" Text="Log in" CssClass="navbar-login" OnClick="btnLogin_Click" />
         </header>
@@ -21,7 +21,7 @@
             
             <div class="welcome-section">
                 <div class="welcome-box">
-                    <h2>Welcome to Trivago Hotels</h2>
+                    <h2>Welcome to UPV Hotels</h2>
                     <p>Enjoy a unique lodging experience. We offer you the best in comfort and services.</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
 
         
         <div class="footer">
-            <p>&copy; 2025 Trivago Hotels. All rights reserved.</p>
+            <p>&copy; 2025 UPV Hotels. All rights reserved.</p>
         </div>
     </form>
 </body>
