@@ -80,82 +80,10 @@ namespace Project_Soufiane_Maria
 
         // Método para insertar al usuario en la base de datos
         // Método para insertar al usuario en la base de datos
-        public void InsertSelf(Page pageReference)
-        {
-            // Ruta física de database1.db
-            string pathDB = pageReference.Server.MapPath("~/database1.db");
-
-            // Pooling desactivado para evitar bloqueos
-            string connectionString = "Data Source=" + pathDB + ";Version=3;Pooling=False;";
-
-            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
-            {
-                conn.Open();
-
-                // Evita que SQLite lance "database is locked" instantáneamente
-                using (SQLiteCommand pragmaCmd = new SQLiteCommand("PRAGMA busy_timeout=5000;", conn))
-                {
-                    pragmaCmd.ExecuteNonQuery();
-                }
-
-                // Transacción para insertar en ambas tablas de forma atómica
-                using (SQLiteTransaction trans = conn.BeginTransaction())
-                {
-                    using (SQLiteCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.Transaction = trans;
-
-                        try
-                        {
-                            // ----------------------------------------------
-                            // INSERT CREDENTIALS
-                            // ----------------------------------------------
-                            // Hashear la contraseña
-                            string hashedPassword = HashPassword(this.Password);
-
-                            cmd.CommandText = @"
-                    INSERT INTO credentials (username, profile, password)
-                    VALUES (@username, @profile, @password);";
-
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddWithValue("@username", this.Username);
-                            cmd.Parameters.AddWithValue("@profile", this.Profile);
-                            cmd.Parameters.AddWithValue("@password", hashedPassword); // Contraseña hasheada
-
-                            cmd.ExecuteNonQuery();
-
-                            // ----------------------------------------------
-                            // INSERT CLIENTS
-                            // ----------------------------------------------
-                            cmd.CommandText = @"
-                    INSERT INTO clients (ID, name, DOB, address, mobile)
-                    VALUES (@ID, @name, @DOB, @address, @mobile);";
-
-                            cmd.Parameters.Clear();
-                            cmd.Parameters.AddWithValue("@ID", this.Id);
-                            cmd.Parameters.AddWithValue("@name", this.Username); // Usamos username como nombre
-                            cmd.Parameters.AddWithValue("@DOB", this.DoB);
-                            cmd.Parameters.AddWithValue("@address", this.Address);
-                            cmd.Parameters.AddWithValue("@mobile", this.Mobile);
-
-                            cmd.ExecuteNonQuery();
-
-                            // Commit final
-                            trans.Commit();
-                        }
-                        catch
-                        {
-                            // Si ocurre un error, revertir la transacción
-                            trans.Rollback();
-                            throw; // Propagar el error para que sea gestionado en el nivel superior (ej. receptionist.aspx.cs)
-                        }
-                    }
-                }
-            }
-        }
+        
 
         // Método para hashear la contraseña usando MD5
-        private string HashPassword(string password)
+        public static string HashPassword(string password)
         {
             using (MD5 md5Hash = MD5.Create())
             {
@@ -172,16 +100,7 @@ namespace Project_Soufiane_Maria
             }
         }
 
-        public ClientUser(string name, DateTime dob, string address, int mobile)
-        {
-            Username = name;
-            DoB = dob;
-            Address = address;
-            Mobile = mobile;
-            Profile = "";  // Perfil vacío por ahora, ya que no lo estamos utilizando
-            Password = ""; // Contraseña vacía por ahora, ya que no la estamos utilizando en este constructor
-            Id = ""; // El ID también se puede dejar vacío
-        }
+         
 
         public static List<ClientUser> SearchClientsByName(string nameFragment)
         {

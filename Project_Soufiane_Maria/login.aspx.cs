@@ -112,28 +112,13 @@ namespace Project_Soufiane_Maria
         private bool VerifyPasswordHash(string enteredPassword, string storedHashPassword)
         {
             // Hashear la contraseña ingresada
-            string hashedEnteredPassword = HashPassword(enteredPassword);
+            string hashedEnteredPassword = ClientUser.HashPassword(enteredPassword);
 
             // Comparar el hash de la contraseña ingresada con el hash almacenado
             return hashedEnteredPassword.Equals(storedHashPassword, StringComparison.OrdinalIgnoreCase);
         }
 
         // Método para hashear la contraseña usando MD5
-        private string HashPassword(string password)
-        {
-            using (MD5 md5Hash = MD5.Create())
-            {
-                // Convertir la contraseña en bytes y calcular el hash
-                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-                // Convertir el array de bytes a una cadena hexadecimal
-                StringBuilder sBuilder = new StringBuilder();
-                for (int i = 0; i < data.Length; i++)
-                {
-                    sBuilder.Append(data[i].ToString("x2"));
-                }
-                return sBuilder.ToString();
-            }
-        }
+        
     }
 }

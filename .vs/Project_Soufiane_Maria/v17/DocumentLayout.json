@@ -1,22 +1,46 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\",
+  "WorkspaceRootPath": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|c:\\users\\mar\u00EDa\\documents\\clase\\2\\ingles\\web\\project_soufiane_maria\\project_soufiane_maria\\receptionist.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\receptionist.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|c:\\users\\mar\u00EDa\\documents\\clase\\2\\ingles\\web\\project_soufiane_maria\\project_soufiane_maria\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|c:\\users\\mar\u00EDa\\documents\\clase\\2\\ingles\\web\\project_soufiane_maria\\project_soufiane_maria\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|c:\\users\\mar\u00EDa\\documents\\clase\\2\\ingles\\web\\project_soufiane_maria\\project_soufiane_maria\\receptionist.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|c:\\users\\soufiane\\documents\\git\\project_soufiane_maria\\project_soufiane_maria\\receptionist.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\receptionist.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\clientuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\clientuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\client.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\client.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\client.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\client.aspx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\receptionist.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\receptionist.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\project_soufiane_maria\\client.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{AD47BCB4-1F44-438D-A594-878240784034}|Project_Soufiane_Maria\\Project_Soufiane_Maria.csproj|solutionrelative:project_soufiane_maria\\client.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,41 +50,116 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
+              "Title": "ClientUser.cs",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\ClientUser.cs",
+              "RelativeDocumentMoniker": "Project_Soufiane_Maria\\ClientUser.cs",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\ClientUser.cs",
+              "RelativeToolTip": "Project_Soufiane_Maria\\ClientUser.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAmwGMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T08:49:07.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "styles.css",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\styles.css",
+              "RelativeDocumentMoniker": "Project_Soufiane_Maria\\styles.css",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\styles.css",
+              "RelativeToolTip": "Project_Soufiane_Maria\\styles.css",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAmwIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-12-03T18:16:57.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "client.aspx",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\client.aspx",
+              "RelativeDocumentMoniker": "Project_Soufiane_Maria\\client.aspx",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\client.aspx",
+              "RelativeToolTip": "Project_Soufiane_Maria\\client.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-12-03T15:19:04.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "index.aspx",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\index.aspx",
+              "RelativeDocumentMoniker": "Project_Soufiane_Maria\\index.aspx",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\index.aspx",
+              "RelativeToolTip": "Project_Soufiane_Maria\\index.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2025-12-03T15:18:59.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "client.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\client.aspx.cs",
+              "RelativeDocumentMoniker": "Project_Soufiane_Maria\\client.aspx.cs",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\client.aspx.cs",
+              "RelativeToolTip": "Project_Soufiane_Maria\\client.aspx.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAJ8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T15:11:47.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "client.aspx.designer.cs",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\client.aspx.designer.cs",
+              "RelativeDocumentMoniker": "Project_Soufiane_Maria\\client.aspx.designer.cs",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\client.aspx.designer.cs",
+              "RelativeToolTip": "Project_Soufiane_Maria\\client.aspx.designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T15:10:39.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "receptionist.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx.cs",
               "RelativeDocumentMoniker": "Project_Soufiane_Maria\\receptionist.aspx.cs",
-              "ToolTip": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx.cs",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx.cs",
               "RelativeToolTip": "Project_Soufiane_Maria\\receptionist.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAiwH0AAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T12:20:13.665Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "receptionist.aspx",
-              "DocumentMoniker": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx",
               "RelativeDocumentMoniker": "Project_Soufiane_Maria\\receptionist.aspx",
-              "ToolTip": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\receptionist.aspx",
               "RelativeToolTip": "Project_Soufiane_Maria\\receptionist.aspx",
-              "LogicalView": "7651a702-06e5-11d1-8ebd-00a0c90f26ea",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2025-11-28T12:12:11.656Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-28T12:12:11.656Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "login.aspx",
-              "DocumentMoniker": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx",
               "RelativeDocumentMoniker": "Project_Soufiane_Maria\\login.aspx",
-              "ToolTip": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx",
               "RelativeToolTip": "Project_Soufiane_Maria\\login.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
@@ -69,13 +168,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "login.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx.cs",
               "RelativeDocumentMoniker": "Project_Soufiane_Maria\\login.aspx.cs",
-              "ToolTip": "C:\\Users\\Mar\u00EDa\\Documents\\Clase\\2\\ingles\\web\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx.cs",
-              "RelativeToolTip": "Project_Soufiane_Maria\\login.aspx.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAQwFAAAABZAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Soufiane\\Documents\\git\\Project_Soufiane_Maria\\Project_Soufiane_Maria\\login.aspx.cs*",
+              "RelativeToolTip": "Project_Soufiane_Maria\\login.aspx.cs*",
+              "ViewState": "AgIAABkAAAAAAAAAAAAiwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T11:31:47.008Z",
               "EditorCaption": ""

@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -82,53 +86,192 @@ namespace Project_Soufiane_Maria
         }
 
         // Método para registrar usuario + cliente
-        protected void btnRegisterUser_Click(object sender, EventArgs e)
+        // En el archivo receptionist.aspx.cs
+
+
+protected void btnRegisterUser_Click(object sender, EventArgs e)
+    {
+        // 1. Recolección y Validación de Datos (CON TUS REGEX EXACTAS)
+        try
         {
-            try
+            string id = TextBoxID.Text.Trim();
+            string username = TextBoxUsername.Text.Trim();
+            string profile = "client"; // Perfil fijo
+            string password = TextBoxPassword.Text.Trim();
+            string dobStr = TextBoxDOB.Text.Trim();
+            string address = TextBoxAddress.Text.Trim();
+            string mobileStr = TextBoxMobile.Text.Trim();
+
+            // **A. Validación de Campos Obligatorios** (De tu segundo código)
+            string[] fields = { id, username, password, dobStr, address, mobileStr };
+            if (fields.Any(string.IsNullOrWhiteSpace))
             {
-                string id = TextBoxID.Text.Trim();
-                string username = TextBoxUsername.Text.Trim();
-                string profile = "client";
-                string password = TextBoxPassword.Text.Trim();
-                string dobStr = TextBoxDOB.Text.Trim();
-                string address = TextBoxAddress.Text.Trim();
-                string mobileStr = TextBoxMobile.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(profile) || string.IsNullOrWhiteSpace(password))
-                {
-                    LabelMessage.Text = "Please fill at least ID, username, profile and password.";
-                    return;
-                }
-
-                DateTime dob;
-                if (!DateTime.TryParse(dobStr, out dob))
-                {
-                    LabelMessage.Text = "Invalid date format (use yyyy-mm-dd).";
-                    return;
-                }
-
-                int mobile;
-                if (!int.TryParse(mobileStr, out mobile))
-                {
-                    LabelMessage.Text = "Mobile must be numeric.";
-                    return;
-                }
-
-                ClientUser nuevo = new ClientUser(username, profile, password, id, dob, address, mobile);
-                nuevo.InsertSelf(this);
-
-                LabelMessage.ForeColor = System.Drawing.Color.Green;
-                LabelMessage.Text = "User/client successfully registered.";
+                
+                LabelMessage.Text = "Please fill in all fields (ID, username, password, date of birth, address, and mobile number).";
+                return;
             }
-            catch (Exception ex)
+
+            // **B. Validaciones por Expresión Regular** (TUS REGEX EXACTAS)
+
+            // Username: solo letras, números y guiones bajos (^[a-zA-Z0-9_]+$)
+            string usernamePattern = @"^[a-zA-Z0-9_]+$";
+            if (!Regex.IsMatch(username, usernamePattern))
             {
-                LabelMessage.ForeColor = System.Drawing.Color.Red;
-                LabelMessage.Text = "Error while registering: " + ex.Message;
+                
+                LabelMessage.Text = "Username can only contain letters, numbers, and underscores.";
+                return;
+            }
+
+                // Contraseña: mínimo 6 caracteres, al menos una letra y un número
+                string passwordPattern = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$";
+
+                if (!Regex.IsMatch(password, passwordPattern))
+                {
+                    LabelMessage.Text = "Password must be at least 6 characters long, with at least one letter and one number.";
+                    return;
+                }
+
+
+                // ID: 8 dígitos seguidos de una letra (^\d{8}[A-Za-z]$)
+                string idPattern = @"^\d{8}[A-Za-z]$";
+            if (!Regex.IsMatch(id, idPattern))
+            {
+               
+                LabelMessage.Text = "ID must be 8 digits followed by a letter.";
+                return;
+            }
+
+            // Fecha de Nacimiento: formato yyyy-mm-dd (^\d{4}-\d{2}-\d{2}$)
+            string dobPattern = @"^\d{4}-\d{2}-\d{2}$";
+            if (!Regex.IsMatch(dobStr, dobPattern))
+            {
+                
+                LabelMessage.Text = "Invalid date format. Please use yyyy-mm-dd.";
+                return;
+            }
+
+            // Dirección: solo letras, números, espacios, comas, puntos y guiones, min 5 caracteres (^[a-zA-Z0-9\s,.-]{5,}$ )
+            string addressPattern = @"^[a-zA-Z0-9\s,.-]{5,}$";
+            if (!Regex.IsMatch(address, addressPattern))
+            {
+                
+                LabelMessage.Text = "Address must contain only letters, numbers, spaces, commas, periods, and hyphens. It should be at least 5 characters long.";
+                return;
+            }
+
+            // Número de Móvil: exactamente 9 dígitos (^\d{9}$)
+            string mobilePattern = @"^\d{9}$";
+            if (!Regex.IsMatch(mobileStr, mobilePattern))
+            {
+                
+                LabelMessage.Text = "Mobile number must be exactly 9 digits.";
+                return;
+            }
+
+            // **C. Conversión de Tipos de Datos**
+
+            // La conversión debe ser ParseExact porque el regex exige el formato yyyy-mm-dd.
+            DateTime dob;
+            if (!DateTime.TryParseExact(dobStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dob))
+            {
+                // Esto captura fechas que pasan el formato de regex pero son inválidas (ej. 2025-02-30)
+               
+                LabelMessage.Text = "The date is not a valid calendar date (e.g., 2025-02-30).";
+                return;
+            }
+
+            // Conversión a int (es segura si pasó la regex de 9 dígitos)
+            int mobile = int.Parse(mobileStr);
+
+            // -------------------------------------------------------------
+            // 2. Lógica de Base de Datos Directamente en el Code-Behind (DE TU PRIMER CÓDIGO)
+            // -------------------------------------------------------------
+
+            // **IMPORTANTE**: Usamos 'Server.MapPath' directamente porque estamos en el contexto Page.
+            string pathDB = Server.MapPath("~/database1.db");
+            string connectionString = "Data Source=" + pathDB + ";Version=3;Pooling=False;";
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                // Evita que SQLite lance "database is locked"
+                using (SQLiteCommand pragmaCmd = new SQLiteCommand("PRAGMA busy_timeout=5000;", conn))
+                {
+                    pragmaCmd.ExecuteNonQuery();
+                }
+
+                // Transacción para insertar en ambas tablas de forma atómica
+                using (SQLiteTransaction trans = conn.BeginTransaction())
+                {
+                    using (SQLiteCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.Transaction = trans;
+
+                        try
+                        {
+                            // Se asume que ClientUser.HashPassword es accesible y funcional
+                            // Nota: Si la clase ClientUser no existe, esta línea fallará.
+                            // La he mantenido de tu código original.
+                            string hashedPassword = ClientUser.HashPassword(password);
+
+                            // INSERT CREDENTIALS
+                            cmd.CommandText = @"
+                            INSERT INTO credentials (username, profile, password)
+                            VALUES (@username, @profile, @password);";
+
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@username", username);
+                            cmd.Parameters.AddWithValue("@profile", profile);
+                            cmd.Parameters.AddWithValue("@password", hashedPassword);
+
+                            cmd.ExecuteNonQuery();
+
+                            // ----------------------------------------------
+                            // INSERT CLIENTS
+                            // ----------------------------------------------
+                            cmd.CommandText = @"
+                            INSERT INTO clients (ID, name, DOB, address, mobile)
+                            VALUES (@ID, @name, @DOB, @address, @mobile);";
+
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddWithValue("@ID", id);
+                            cmd.Parameters.AddWithValue("@name", username);
+                            cmd.Parameters.AddWithValue("@DOB", dob); // DateTime
+                            cmd.Parameters.AddWithValue("@address", address);
+                            cmd.Parameters.AddWithValue("@mobile", mobile); // int
+
+                            cmd.ExecuteNonQuery();
+
+                            // Commit final
+                            trans.Commit();
+
+                            // Mensaje de éxito
+                            LabelMessage.ForeColor = System.Drawing.Color.Green;
+                            LabelMessage.Text = "User/client successfully registered.";
+
+                        }
+                        catch (Exception ex)
+                        {
+                            // Si ocurre un error, revertir la transacción
+                            trans.Rollback();
+                            throw; // Propagar el error al catch exterior
+                        }
+                    }
+                }
             }
         }
+        catch (Exception ex)
+        {
+            LabelMessage.ForeColor = System.Drawing.Color.Red;
+            // El mensaje de error será más útil si no es solo la validación, sino un error DB
+            LabelMessage.Text = "Error while registering: " + ex.Message;
+        }
+    }
 
-        // Método para realizar la búsqueda de clientes por nombre
-        protected void btnSearch_Click(object sender, EventArgs e)
+
+    // Método para realizar la búsqueda de clientes por nombre
+    protected void btnSearch_Click(object sender, EventArgs e)
         {
             string searchFragment = TextBoxSearch.Text.Trim();
 
