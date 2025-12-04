@@ -118,7 +118,11 @@ namespace Project_Soufiane_Maria
             return hashedEnteredPassword.Equals(storedHashPassword, StringComparison.OrdinalIgnoreCase);
         }
 
-        // Método para hashear la contraseña usando MD5
-        
+        protected void btnBackToIndex_Click(object sender, EventArgs e)
+        {
+            // Simplemente redirigir al índice sin tocar la sesión
+            Response.Redirect("index.aspx");
+        }
+
     }
 }

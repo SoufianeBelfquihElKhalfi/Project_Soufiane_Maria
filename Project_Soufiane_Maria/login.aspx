@@ -83,12 +83,33 @@
             margin-bottom: 20px;
         }
 
+        #btnBackToIndex {
+            display: inline-block; /* Evita que ocupe todo el ancho */
+width: auto; /* Asegura tamaño ajustado al contenido */
+            padding: 12px;
+             background-color: darkslateblue;  /* Color de fondo del botón */
+ color: white;  /* Color del texto */
+ border: none;
+ border-radius: 4px;
+ font-size: 18px;
+ cursor: pointer;  /* Puntero de mano al pasar por encima */
+ box-sizing: border-box;
+ transition: background-color 0.3s ease;  /* Transición de color de fondo */
+            
+        }
+
+        /* Cambio de color al pasar el ratón sobre el botón */
+        #btnBackToIndex:hover {
+            background-color: cornflowerblue;
+        }
         </style>
 </head>
 
 <body>
     <form id="form1" runat="server">
-        <div>
+        <asp:Button ID="btnBackToIndex" runat="server" Text="Back to landing" OnClick="btnBackToIndex_Click" CssClass="btn" />
+<br />
+<br />
             Username:<br />
             <br />
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>

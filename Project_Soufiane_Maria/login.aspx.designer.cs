@@ -24,6 +24,15 @@ namespace Project_Soufiane_Maria
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// btnBackToIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBackToIndex;
+
+        /// <summary>
         /// TextBox1 control.
         /// </summary>
         /// <remarks>
