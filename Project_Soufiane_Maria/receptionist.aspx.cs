@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -94,26 +96,69 @@ namespace Project_Soufiane_Maria
                 string address = TextBoxAddress.Text.Trim();
                 string mobileStr = TextBoxMobile.Text.Trim();
 
-                if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(profile) || string.IsNullOrWhiteSpace(password))
+                // Validación para asegurarse de que todos los campos estén completos (no vacíos ni solo espacios)
+                string[] fields = { id, username, password, dobStr, address, mobileStr };
+                if (fields.Any(string.IsNullOrWhiteSpace))  // Si cualquiera de los campos está vacío o tiene solo espacios en blanco
                 {
-                    LabelMessage.Text = "Please fill at least ID, username, profile and password.";
+                    LabelMessage.Text = "Please fill in all fields (ID, username, password, date of birth, address, and mobile number).";
                     return;
                 }
 
-                DateTime dob;
-                if (!DateTime.TryParse(dobStr, out dob))
+                // Validación del nombre de usuario (solo letras, números y guiones bajos)
+                string usernamePattern = @"^[a-zA-Z0-9_]+$";  // Alfanumérico y guión bajo
+                if (!Regex.IsMatch(username, usernamePattern))
                 {
-                    LabelMessage.Text = "Invalid date format (use yyyy-mm-dd).";
+                    LabelMessage.Text = "Username can only contain letters, numbers, and underscores.";
                     return;
                 }
 
-                int mobile;
-                if (!int.TryParse(mobileStr, out mobile))
+                // Validación de la contraseña (mínimo 6 caracteres, al menos una letra y un número)
+                string passwordPattern = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$";  // Mínimo 6 caracteres, al menos una letra y un número
+                if (!Regex.IsMatch(password, passwordPattern))
                 {
-                    LabelMessage.Text = "Mobile must be numeric.";
+                    LabelMessage.Text = "Password must be at least 6 characters long, with at least one letter and one number.";
                     return;
                 }
 
+                // Validación de ID (solo números)
+                string idPattern = @"^\d{8}[A-Za-z]$";
+                if (!Regex.IsMatch(id, idPattern))
+                {
+                    LabelMessage.Text = "ID must be 8 digits followed by a letter.";
+                    return;
+                }
+
+                // Validación de fecha de nacimiento (formato yyyy-mm-dd)
+                string dobPattern = @"^\d{4}-\d{2}-\d{2}$"; // Formato yyyy-mm-dd
+                if (!Regex.IsMatch(dobStr, dobPattern))
+                {
+                    LabelMessage.Text = "Invalid date format. Please use yyyy-mm-dd.";
+                    return;
+                }
+
+                // Validación de dirección (solo letras, números, espacios, comas, puntos y guiones)
+                string addressPattern = @"^[a-zA-Z0-9\s,.-]{5,}$";  // Al menos 5 caracteres, letras, números, espacios, comas, puntos, guiones
+                if (!Regex.IsMatch(address, addressPattern))
+                {
+                    LabelMessage.Text = "Address must contain only letters, numbers, spaces, commas, periods, and hyphens. It should be at least 5 characters long.";
+                    return;
+                }
+
+                // Validación de número de teléfono móvil (exactamente 10 dígitos)
+                string mobilePattern = @"^\d{9}$"; // Exactamente 10 dígitos
+                if (!Regex.IsMatch(mobileStr, mobilePattern))
+                {
+                    LabelMessage.Text = "Mobile number must be exactly 9 digits.";
+                    return;
+                }
+
+                // Convertir la fecha de nacimiento a DateTime para validación adicional
+                DateTime dob = DateTime.ParseExact(dobStr, "yyyy-MM-dd", null);
+
+                // Convertir el número de móvil a int
+                int mobile = int.Parse(mobileStr);
+
+                // Crear y registrar al nuevo usuario
                 ClientUser nuevo = new ClientUser(username, profile, password, id, dob, address, mobile);
                 nuevo.InsertSelf(this);
 
