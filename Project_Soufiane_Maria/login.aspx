@@ -6,68 +6,68 @@
 <head runat="server">
     <title>Login</title>
 
-    <!-- Estilos CSS -->
+  
     <style>
-        /* Estilos generales para el formulario */
+       
         form {
             width: 100%;
-            max-width: 400px;  /* Ajusta el ancho del formulario */
-            margin: 0 auto;  /* Centra el formulario en la página */
+            max-width: 400px;  
+            margin: 0 auto;  
             padding: 20px;
             border-radius: 8px;
-            background-color: #f9f9f9;  /* Fondo claro */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+            background-color: #f9f9f9; 
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  
         }
 
-        /* Estilo de los campos de texto (TextBox) */
+        
         input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;  /* Espacio entre campos */
-            border: 1px solid #ccc;  /* Borde gris */
-            border-radius: 4px;  /* Bordes redondeados */
+            margin: 10px 0;  
+            border: 1px solid #ccc; 
+            border-radius: 4px;  
             font-size: 16px;
             box-sizing: border-box;
         }
 
 
-        /* Estilo del botón (Button) */
+       
         .btn{
             width: 100%;
             padding: 12px;
-            background-color: darkslateblue;  /* Color de fondo del botón */
-            color: white;  /* Color del texto */
+            background-color: darkslateblue; 
+            color: white;  
             border: none;
             border-radius: 4px;
             font-size: 18px;
-            cursor: pointer;  /* Puntero de mano al pasar por encima */
+            cursor: pointer; 
             box-sizing: border-box;
-            transition: background-color 0.3s ease;  /* Transición de color de fondo */
+            transition: background-color 0.3s ease;  
         }
 
-        /* Cambio de color al pasar el ratón sobre el botón */
+       
         .btn:hover
         {
             background-color: cornflowerblue;
         }
 
-        /* Espaciado entre los elementos */
+       
         br {
             margin: 5px 0;
         }
 
-        /* Estilo de los mensajes de validación */
+       
         .LabelMessage {
             color: red;
             font-size: 14px;
             text-align: center;
         }
 
-        /* Estilo del contenedor de la página */
+        
         body {
             font-family: Arial, sans-serif;
-            background-color: #e9ecef;  /* Color de fondo suave */
+            background-color: #e9ecef;  
             padding: 30px;
             display: flex;
             justify-content: center;
@@ -75,7 +75,7 @@
             height: 100vh;
         }
 
-        /* Estilo de la cabecera */
+      
         h1 {
             text-align: center;
             font-size: 24px;
@@ -84,21 +84,21 @@
         }
 
         #btnBackToIndex {
-            display: inline-block; /* Evita que ocupe todo el ancho */
-width: auto; /* Asegura tamaño ajustado al contenido */
+            display: inline-block;
+width: auto; 
             padding: 12px;
-             background-color: darkslateblue;  /* Color de fondo del botón */
- color: white;  /* Color del texto */
+             background-color: darkslateblue; 
+ color: white;
  border: none;
  border-radius: 4px;
  font-size: 18px;
- cursor: pointer;  /* Puntero de mano al pasar por encima */
+ cursor: pointer; 
  box-sizing: border-box;
- transition: background-color 0.3s ease;  /* Transición de color de fondo */
+ transition: background-color 0.3s ease;  
             
         }
 
-        /* Cambio de color al pasar el ratón sobre el botón */
+      
         #btnBackToIndex:hover {
             background-color: cornflowerblue;
         }

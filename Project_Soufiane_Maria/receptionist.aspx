@@ -53,7 +53,7 @@
             justify-content: space-between;
             gap: 20px;
             padding: 50px 30px;
-            flex-wrap: wrap; /* Esto permite que los elementos se ajusten en diferentes líneas si el espacio es reducido */
+            flex-wrap: wrap;
         }
 
         .card {
@@ -104,16 +104,16 @@
 <body>
     <form id="form1" runat="server">
 
-        <!-- HEADER DE LA PÁGINA -->
+       
         <header>
             <asp:Label ID="LabelUsername" runat="server" />
             <asp:Label ID="LabelProfile" runat="server" />
             <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="header-btn" />
         </header>
 
-        <!-- Contenedor de los formularios al mismo nivel -->
+      
         <div class="container">
-            <!-- FORMULARIO ÚNICO PARA REGISTRAR USUARIO Y CLIENTE -->
+            
             <div class="card">
                 <h3>Register New User / Client</h3>
 
@@ -142,7 +142,7 @@
                 <asp:Label ID="LabelMessage" runat="server" ForeColor="Red"></asp:Label>
             </div>
 
-            <!-- SECCIÓN PARA CONSULTAS -->
+           
             <div class="card">
                 <h3>Search Clients</h3>
 
@@ -151,7 +151,7 @@
 
                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" /><br /><br />
 
-                <!-- ListBox para mostrar clientes con toda la información -->
+              
                 <asp:ListBox ID="ListBoxClients" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ListBoxClients_SelectedIndexChanged" style="width: 100%; height: 200px;">
                     <asp:ListItem Text="Select Client" Value="" />
                 </asp:ListBox>
@@ -162,11 +162,11 @@
                 <asp:Label ID="LabelSelectedClient" runat="server" />
             </div>
 
-            <!-- SECCIÓN PARA MOSTRAR TODAS LAS HABITACIONES -->
+           
             <div class="card">
                 <h3>All Rooms</h3>
 
-                <!-- ListBox para mostrar todas las habitaciones -->
+               
                 <asp:ListBox ID="ListBoxRooms" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ListBoxRooms_SelectedIndexChanged" style="width: 100%; height: 200px;">
                     <asp:ListItem Text="Select Room" Value="" />
                 </asp:ListBox>
@@ -175,7 +175,7 @@
                 <asp:Label ID="LabelSelectedRoom" runat="server" />
             </div>
 
-            <!-- Formulario para fechas de llegada y salida -->
+            
             <div class="card">
                 <h3>Reservation Dates</h3>
 

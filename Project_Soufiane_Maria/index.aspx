@@ -28,7 +28,7 @@
             margin: 0;
         }
 
-        /* HEADER */
+       
         .navbar {
             width: 100%;
             height: 80px;
@@ -72,14 +72,14 @@
             opacity: 0.85;
         }
 
-        /* CONTENT */
+       
         .main-content {
             padding: 50px 100px;
             flex: 1;
             box-sizing: border-box;
         }
 
-        /* Welcome section */
+        
         .welcome-section {
             text-align: center;
             margin-bottom: 50px;
@@ -103,7 +103,7 @@
             margin-bottom: 0;
         }
 
-        /* SERVICE CARDS */
+       
         .service-section {
             display: flex;
             justify-content: space-between;
@@ -138,7 +138,7 @@
             color: #777;
         }
 
-        /* FOOTER */
+        
         .footer {
             background-color: #333;
             color: white;
@@ -154,7 +154,7 @@
             font-size: 14px;
         }
 
-        /* RESPONSIVE */
+        
         @media (max-width: 768px) {
             .main-content {
                 padding: 20px;
@@ -208,7 +208,7 @@
 
         <div class="main-content">
 
-            <!-- WELCOME -->
+            
             <div class="welcome-section">
                 <div class="welcome-box">
                     <h2>Welcome to Trivago Hotels</h2>
@@ -216,7 +216,7 @@
                 </div>
             </div>
 
-            <!-- SERVICES -->
+            
             <div class="service-section">
                 <div class="service-card">
                     <asp:Image ID="imgHabitaciones" runat="server" ImageUrl="~/images/habitaciones.png" AlternateText="Rooms" />
@@ -239,7 +239,7 @@
 
         </div>
 
-        <!-- FOOTER -->
+        
         <div class="footer">
             <p>&copy; 2025 Trivago Hotels. All rights reserved.</p>
         </div>
